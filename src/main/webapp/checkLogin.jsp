@@ -13,6 +13,6 @@
         out.println("<a href='logout.jsp'>Log out</a>");
         response.sendRedirect("success.jsp");
     } else {
-        out.println("Invalid password <a href='login.jsp'>try again</a>");
+        out.println("Invalid password <div><a href='login.jsp'>Try again</a></div>");
     }
 %>
