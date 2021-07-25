@@ -1,5 +1,4 @@
 # BuyMe
-## Project Specifications
 
 ### **Introduction** 
 
