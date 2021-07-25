@@ -15,7 +15,8 @@
     }
     
     // Check to see if the entered username and password are valid
-    else if (pwd.length() < 1 || userid.length() < 1) {
+    // Usernames and passwords cannot be blank and cannot contain spaces
+    else if (pwd.length() < 1 || userid.length() < 1 || pwd.contains(" ") || userid.contains(" ")) {
         	out.println("Invalid password or username <div><a href='register.jsp'>Try again</a></div>");
     }
     
