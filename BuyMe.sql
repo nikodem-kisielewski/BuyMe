@@ -56,3 +56,53 @@ CREATE TABLE IF NOT EXISTS footwear (
   gender varchar(6),
   primary key(item_id),
   CONSTRAINT fk_item_id FOREIGN KEY(item_id) references item(item_id));
+
+CREATE TABLE IF NOT EXISTS alerts(
+  username varchar(30),
+  item_id int, 
+  price_min decimal(9,2),
+  price_max decimal(9,2),
+  PRIMARY KEY(username,item_id),
+  CONSTRAINT fk_alerts_user FOREIGN KEY(username) REFERENCES user(username),
+  CONSTRAINT fk_alerts_item FOREIGN KEY(item_id) REFERENCES item(item_id));
+
+CREATE TABLE IF NOT EXISTS autoBid(
+  username varchar(30),
+  auction_id int,
+  active_status bool, 
+  highest_price decimal(9,2),
+  time_interval time,
+  PRIMARY KEY(username,auction_id),
+  CONSTRAINT fk_autoBid_user FOREIGN KEY(username) REFERENCES user(username),
+  CONSTRAINT fk_autoBid_item FOREIGN KEY(auction_id) REFERENCES auction(auction_id));
+
+CREATE TABLE IF NOT EXISTS bidOn(
+  username varchar(30),
+  date datetime,
+  auction_id int,
+  PRIMARY KEY(username, auction_id,date),
+  CONSTRAINT fk_bidOn_user FOREIGN KEY(username) REFERENCES user(username),
+  CONSTRAINT fk_bidOn_auction FOREIGN KEY(auction_id) REFERENCES auction(auction_id));
+
+CREATE TABLE IF NOT EXISTS asks(
+  customer_username varchar(30),
+  representative_username varchar(30),
+  date datetime,
+  question varchar(200),
+  answer varchar(200),
+  PRIMARY KEY(customer_username,representative_username,date),
+  CONSTRAINT fk_asks_customer FOREIGN KEY(customer_username) REFERENCES user(username),
+  CONSTRAINT fk_asks_representative FOREIGN KEY(representative_username) REFERENCES user(username));
+
+CREATE TABLE IF NOT EXISTS sells(
+  username varchar(30),
+  auction_id int,
+  final_price decimal(9,2),
+  PRIMARY KEY(username,auction_id),
+  CONSTRAINT fk_sells_user FOREIGN KEY(username) REFERENCES user(username),
+  CONSTRAINT fk_sells_auction FOREIGN KEY(auction_id) REFERENCES auction(auction_id));
+
+CREATE TABLE IF NOT EXISTS beingSold(
+  auction_id int,
+  PRIMARY KEY(auction_id),
+  CONSTRAINT fk_beingSold_auction FOREIGN KEY(auction_id) REFERENCES auction(auction_id));
