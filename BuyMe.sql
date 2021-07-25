@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS shirts (
   child bool,
   shirt_size varchar(3),
   gender varchar(6),
-  primary key(item_id),
+  PRIMARY KEY(item_id),
   CONSTRAINT fk_item_id FOREIGN KEY(item_id) references item(item_id));
   
 CREATE TABLE IF NOT EXISTS pants (
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS pants (
   pants_type varchar(30),
   style varchar(30),
   gender varchar(6),
-  primary key(item_id),
+  PRIMARY KEY(item_id),
   CONSTRAINT fk_item_id FOREIGN KEY(item_id) references item(item_id));
   
 CREATE TABLE IF NOT EXISTS footwear (
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS footwear (
   securing_method varchar(30),
   purpose varchar(30),
   gender varchar(6),
-  primary key(item_id),
+  PRIMARY KEY(item_id),
   CONSTRAINT fk_item_id FOREIGN KEY(item_id) references item(item_id));
 
 CREATE TABLE IF NOT EXISTS alerts(
