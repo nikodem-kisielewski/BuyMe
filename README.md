@@ -18,6 +18,7 @@ NOTE: Each teams' BuyMe site will be restricted to a specific category of items 
 Additional features for your BuyMe (some of which are not available on eBay) depend on the three classes of users supported:
 
 
+
 I. End-users (buyers and sellers)
 - They must of course be able to create and delete accounts, and login and logout.
 - An end-user can search the list of items on auction according to various criteria based on the fields describing an item. (The more complex searches your team supports the higher the credit.)
@@ -28,6 +29,9 @@ I. End-users (buyers and sellers)
 In addition to end-users, the BuyMe system must also support its staff.
 
 
- II. Customer representatives are available to end-users for answering questions, and modifying any information, as long as the customer rep decides this is reasonable. (This includes resetting passwords and removing bids. So your system need not support any specific rules for removing bids.) They must therefore be able to perform such actions, as well as removing illegal auctions.
+
+II. Customer representatives are available to end-users for answering questions, and modifying any information, as long as the customer rep decides this is reasonable. (This includes resetting passwords and removing bids. So your system need not support any specific rules for removing bids.) They must therefore be able to perform such actions, as well as removing illegal auctions.
+
+
 
 III. One administrative staff member , whose account will have been created ahead of time, will be able to create accounts for customer representatives. This person must also be able to generate summary sales reports, including: total earnings; earnings per { item, item type, end-user};  best-selling {items, end-users}.
