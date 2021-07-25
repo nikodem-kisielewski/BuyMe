@@ -1,13 +1,13 @@
 # BuyMe
 ### Project Specifications
 
-**Introduction** 
+###### **Introduction** 
 
 In this project, you will design and implement a relational database system to support the operations of an online auction system. You will use HTML for the user interface, MySQL for the database server, and Java, Javascript, and JDBC for connectivity between the user interface and database server. 
 You will have to install your own web server that will host your web application (Tomcat) as well as a MySQL server. Everything will be local. Many resources will be provided about how to do everything so don’t worry.
 You are to work in teams of three.
 
-**Project Specification** 
+###### **Project Specification** 
 
 As you probably know, there is a multitude of online auction systems on the web. The most popular one is eBay. I suggest that you visit this web site (although I suppose all of you have visited it many times) to get an understanding of the look-and-feel of an auction web site and how such a system is supposed to function. 
 
