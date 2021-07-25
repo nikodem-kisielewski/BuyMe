@@ -20,12 +20,11 @@ Additional features for your BuyMe (some of which are not available on eBay) dep
 
 
 I. End-users (buyers and sellers)
-  They must of course be able to create and delete accounts, and login and logout.
-  An end-user can search the list of items on auction according to various criteria based on the fields describing an item. (The more complex searches your team supports the   
-    higher the credit.)
-  Potential buyers should be able to set alerts for items they are interested in buying. (motivation: I am often looking for certain items (e.g., sandals, winter coats) that are     no longer manufactured. I am interested when such items show up, esp. if I could also specify sizes & colors.)  
-  A user should be able to view the history of bids  for any specific auction,  the list of all auctions a specific buyer or seller has participated in, the list of  "similar"       items on auction in the preceding month (and auction information about them). [You get to decide "similarity measure".]
-  If you wish, you can anonymize end-users so their actual login-names and e-mail addresses do not show up in auctions.
+- They must of course be able to create and delete accounts, and login and logout.
+- An end-user can search the list of items on auction according to various criteria based on the fields describing an item. (The more complex searches your team supports the higher the credit.)
+- Potential buyers should be able to set alerts for items they are interested in buying. (motivation: I am often looking for certain items (e.g., sandals, winter coats) that are     no longer manufactured. I am interested when such items show up, esp. if I could also specify sizes & colors.)  
+- A user should be able to view the history of bids  for any specific auction,  the list of all auctions a specific buyer or seller has participated in, the list of  "similar"       items on auction in the preceding month (and auction information about them). [You get to decide "similarity measure".]
+- If you wish, you can anonymize end-users so their actual login-names and e-mail addresses do not show up in auctions.
 
 In addition to end-users, the BuyMe system must also support its staff.
 
