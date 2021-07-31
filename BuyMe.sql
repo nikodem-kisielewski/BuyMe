@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS items (
   color varchar(30) DEFAULT NULL,
   design varchar(30) DEFAULT NULL,
   material varchar(30) DEFAULT NULL,
+  quantity int DEFAULT 0,
   PRIMARY KEY(item_id));
   
 CREATE TABLE IF NOT EXISTS shirts (
