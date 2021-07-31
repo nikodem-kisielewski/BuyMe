@@ -10,7 +10,7 @@
        Password:<input type="password" name="password"/> <br/>
        <input type="submit" value="Submit"/>
        <div>
-       		<a href='register.jsp'>New user? Register here</a>
+       	<a href='register.jsp'>New user? Register here</a>
        </div>
      </form>
    </body>

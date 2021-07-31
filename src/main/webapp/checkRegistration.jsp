@@ -17,7 +17,7 @@
     // Check to see if the entered username and password are valid
     // Usernames and passwords cannot be blank and cannot contain spaces
     else if (pwd.length() < 1 || userid.length() < 1 || pwd.contains(" ") || userid.contains(" ")) {
-        	out.println("Invalid password or username <div><a href='register.jsp'>Try again</a></div>");
+        	out.println("Invalid username or password <div><a href='register.jsp'>Try again</a></div>");
     }
     
     // Insert the new user into the database
@@ -37,6 +37,6 @@
         session.setAttribute("user", userid); // the username will be stored in the session
         out.println("welcome " + userid);
         out.println("<div><a href='logout.jsp'>Log out</a></div>");
-        response.sendRedirect("success.jsp");
+        response.sendRedirect("End/EndSuccess.jsp");
     }
 %>
