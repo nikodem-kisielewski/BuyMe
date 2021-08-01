@@ -6,8 +6,8 @@
    <body>
    <h1>BuyMe Login</h1>
      <form action="checkLogin.jsp" method="POST">
-       Username: <input type="text" name="username"/> <br/>
-       Password:<input type="password" name="password"/> <br/>
+       Username:	<input type="text" name="username"/> <br/>
+       Password:	<input type="password" name="password"/> <br/>
        <input type="submit" value="Submit"/>
        <div>
        	<a href='register.jsp'>New user? Register here</a>

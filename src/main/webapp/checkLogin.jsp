@@ -16,13 +16,15 @@
         session.setAttribute("user", userid); // the username will be stored in the session
         out.println("welcome " + userid);
         out.println("<a href='logout.jsp'>Log out</a>");
+        
+        // Check the users account type and redirect them to the proper page
         String type = rs.getString("acct_type");
         if (type.equals("end")) {
-        	response.sendRedirect("End/EndSuccess.jsp");	
+        	response.sendRedirect("End/EndMain.jsp");	
         } else if (type == "rep") {
-        	response.sendRedirect("Rep/RepSuccess.jsp");
+        	response.sendRedirect("Rep/RepMain.jsp");
         } else {
-        	response.sendRedirect("Admin/AdminSuccess.jsp");
+        	response.sendRedirect("Admin/AdminMain.jsp");
         }
         
     // If not in the database, give the user an error message
