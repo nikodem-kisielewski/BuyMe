@@ -8,7 +8,7 @@
 		<div>
 		<form action="checkSimilarListing.jsp" method="POST">
 			Name:	<input type="text" name="name"/><br/>
-			Condition:	<select name="Condition" id="condition">
+			Condition:	<select name="condition" id="condition">
 				<option value="brandnew">Brand New in Box</option>
 				<option value="good">Used: Good</option>
 				<option value="fair">Used: Fair</option>
