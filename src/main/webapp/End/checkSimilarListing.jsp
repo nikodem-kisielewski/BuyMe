@@ -47,13 +47,13 @@ rs = ps.executeQuery();
 	<body>
 		<table>
 			<tr>
-				<td>Item ID</td>
-				<td>Name</td>
-				<td>Condition</td>
-				<td>Manufacturing Location</td>
-				<td>Brand</td>
-				<td>Color</td>
-				<td>Material</td>
+				<td><b>Item ID</b></td>
+				<td><b>Name</b></td>
+				<td><b>Condition</b></td>
+				<td><b>Manufacturing Location</b></td>
+				<td><b>Brand</b></td>
+				<td><b>Color</b></td>
+				<td><b>Material</b></td>
 			</tr>
 			<% while (rs.next()) { %>
 				<tr>
