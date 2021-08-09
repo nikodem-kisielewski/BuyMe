@@ -20,11 +20,11 @@
         // Check the users account type and redirect them to the proper page
         String type = rs.getString("acct_type");
         if (type.equals("end")) {
-        	response.sendRedirect("End/EndMain.jsp");	
+        	response.sendRedirect("End/endMain.jsp");	
         } else if (type == "rep") {
-        	response.sendRedirect("Rep/RepMain.jsp");
+        	response.sendRedirect("rep/repMain.jsp");
         } else {
-        	response.sendRedirect("Admin/AdminMain.jsp");
+        	response.sendRedirect("admin/adminMain.jsp");
         }
         
     // If not in the database, give the user an error message

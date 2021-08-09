@@ -29,9 +29,7 @@
 		ps.setString(2, pwd);
 		// User account type is end user by default
 		ps.setString(3, "end");
-
 		ps.executeUpdate();
-
 		con.close();
 		
         session.setAttribute("user", userid); // the username will be stored in the session
