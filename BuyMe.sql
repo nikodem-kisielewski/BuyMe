@@ -108,5 +108,7 @@ CREATE TABLE IF NOT EXISTS sells(
 
 CREATE TABLE IF NOT EXISTS beingSold(
   auction_id int NOT NULL,
-  PRIMARY KEY(auction_id),
-  CONSTRAINT fk_beingSold_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
+  item_id int NOT NULL,
+  PRIMARY KEY(auction_id, item_id),
+  CONSTRAINT fk_beingSold_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id),
+  CONSTRAINT fk_beingSold_item FOREIGN KEY(item_id) REFERENCES items(item_id));
