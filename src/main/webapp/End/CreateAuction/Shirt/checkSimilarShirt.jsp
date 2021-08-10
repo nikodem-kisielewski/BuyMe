@@ -3,6 +3,7 @@
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -27,8 +28,6 @@ String material = request.getParameter("material");
 String child = request.getParameter("child");
 String shirt_size = request.getParameter("size");
 String gender = request.getParameter("gender");
-
-System.out.println(child);
 
 Class.forName("com.mysql.jdbc.Driver");
 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "rootpass");
@@ -60,6 +59,7 @@ rs = ps.executeQuery();
 	<p>If not, please click the link at the end of the page.</p>
 		<table style= "width:100%">
 			<tr>
+				<td><b>Item ID</b></td>
 				<td><b>Name</b></td>
 				<td><b>Condition</b></td>
 				<td><b>Manufacturing Location</b></td>
@@ -69,11 +69,10 @@ rs = ps.executeQuery();
 				<td><b>Child?</b></td>
 				<td><b>Size</b></td>
 				<td><b>Gender</b></td>
-				<td><b>Similar?</b></td>
 			</tr>
-			<form action="addNewListing.jsp" method="POST">
 			<% while (rs.next()) { %>
 				<tr>
+					<td> <%=  rs.getString("item_id") %></td>
 					<td> <%= rs.getString("name") %></td>
 					<td> <% if (rs.getString("item_condition").equals("brandnew")) %> Brand New
 						 <% if (rs.getString("item_condition").equals("good")) %> Used: Good
@@ -90,11 +89,13 @@ rs = ps.executeQuery();
 					<td> <% if (rs.getString("gender").equals("male")) %> Male
 						 <% if (rs.getString("gender").equals("female")) %> Female
 					</td>
-					<td><input type="radio" id="similarID" name="similarID" value="<%= rs.getString("item_id")%>"></td>
 				</tr>
 			<% } %>
-			</form>
 		</table>
-		<a href="addNewListing.jsp">None of these items are similar to my item.</a>
+		<form action="addSimilarShirt.jsp" method="POST">
+			Item ID of similar item: <input type="text" name="itemID"/>
+			<input type="submit" value="Submit"/>
+		</form>
+		<a href="addNewShirt.jsp">None of these items are similar to my item.</a>
 	</body>
 </html>
