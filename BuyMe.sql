@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
   PRIMARY KEY(username));
 
 CREATE TABLE IF NOT EXISTS auctions (
-  auction_id int NOT NULL,
+  auction_id BIGINT DEFAULT UUID_SHORT(),
   reserve_price decimal(9,2) DEFAULT NULL,
   current_price decimal(9,2) DEFAULT NULL,
   start_date datetime DEFAULT NULL,
