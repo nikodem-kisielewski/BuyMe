@@ -55,8 +55,9 @@ rs = ps.executeQuery();
 
 <!-- Make a table to show similar items in the database -->
 	<body>
+	<% if (rs.next()) { %>
 	<h2> Are any of the following items similar to your listing?</h2>
-	<p>If not, please click the link at the end of the page.</p>
+	<p>If not, please leave the item ID field blank.</p>
 		<table style= "width:100%">
 			<tr>
 				<td><b>Item ID</b></td>
@@ -92,10 +93,12 @@ rs = ps.executeQuery();
 				</tr>
 			<% } %>
 		</table>
+		<% } %>
 		<form action="addSimilarShirt.jsp" method="POST">
-			Item ID of similar item: <input type="text" name="itemID"/>
+			Item ID of similar item: <input type="text" name="itemID"/></br>
+			Auction start date and time: <input type="datetime" name="startDate"></br>
+			Auction end date and time:	<input type="datetime-local" name="endDate"></br>
 			<input type="submit" value="Submit"/>
 		</form>
-		<a href="addNewShirt.jsp">None of these items are similar to my item.</a>
 	</body>
 </html>
