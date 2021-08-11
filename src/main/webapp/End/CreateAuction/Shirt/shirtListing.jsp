@@ -6,7 +6,7 @@
 	<body>
 		<h1>Create a listing</h1>
 		<div>
-		<form action="checkSimilarShirt.jsp" method="POST">
+		<form action="addShirt.jsp" method="POST">
 			Name:	<input type="text" name="name"/><br/>
 			Condition:	<select name="condition" id="condition">
 				<option value="brandnew">Brand New</option>
@@ -34,6 +34,9 @@
 				<option value="male">Male</option>
 				<option value="female">Female</option>
 			</select></br>
+			Auction end date and time: <input type="datetime-local" name="endDate"/></br>
+			Minimum price (reserve): <input type="number" step="0.01" name="reservePrice"/></br>
+			<input type="hidden" name="today" value="">
 			<input type="submit" value="Submit"/>
 			</form>
 		</div>
