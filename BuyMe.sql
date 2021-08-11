@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS auctions (
   auction_id int DEFAULT NULL,
   reserve_price decimal(9,2) DEFAULT NULL,
   current_price decimal(9,2) DEFAULT NULL,
-  start_date datetime DEFAULT NULL,
+  start_date datetime DEFAULT NOW(),
   end_date datetime DEFAULT NULL,
   upper_limit decimal(9,2) DEFAULT NULL,
   PRIMARY KEY(auction_id));
