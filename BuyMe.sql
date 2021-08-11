@@ -14,8 +14,6 @@ CREATE TABLE IF NOT EXISTS auctions (
   current_price decimal(9,2) DEFAULT NULL,
   start_date datetime DEFAULT NULL,
   end_date datetime DEFAULT NULL,
-  price_increment decimal(9,2) DEFAULT NULL,
-  bid_interval decimal(9,2) DEFAULT NULL,
   upper_limit decimal(9,2) DEFAULT NULL,
   PRIMARY KEY(auction_id));
 
