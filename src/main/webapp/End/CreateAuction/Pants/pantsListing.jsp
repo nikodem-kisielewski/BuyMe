@@ -6,7 +6,7 @@
 	<body>
 		<h1>Create a listing</h1>
 		<div>
-		<form action="addShirt.jsp" method="POST">
+		<form action="addPants.jsp" method="POST">
 			Name:	<input type="text" name="name"/><br/>
 			Condition:	<select name="condition" id="condition">
 				<option value="brandnew">Brand New</option>
@@ -30,6 +30,8 @@
 				<option value="XL">XL</option>
 				<option value="XXL">XXL</option>
 			</select></br>
+			Pants type (jeans, khakis, etc.): <input type="text" name="type"></br>
+			Pants style: <input type="text" name="style"></br>
 			Gender:	<select name="gender" id="gender">
 				<option value="male">Male</option>
 				<option value="female">Female</option>
