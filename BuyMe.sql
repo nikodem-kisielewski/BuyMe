@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS footwear (
   item_id int DEFAULT 0,
   child bool DEFAULT NULL,
   shoe_size decimal(3,1) DEFAULT NULL,
-  width varchar(3) DEFAULT NULL,
+  width varchar(6) DEFAULT NULL,
   in_sole bool DEFAULT NULL,
   securing_method varchar(30) DEFAULT NULL,
   purpose varchar(30) DEFAULT NULL,
