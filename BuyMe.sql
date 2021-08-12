@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
   PRIMARY KEY(username));
 
 CREATE TABLE IF NOT EXISTS items (
-  item_id int NOT NULL,
+  item_id int DEFAULT 0,
   name varchar(50) DEFAULT NULL,
   item_condition varchar(30) DEFAULT NULL,
   manufacturing_location varchar(30) DEFAULT NULL,
@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS items (
   PRIMARY KEY(item_id));
 
 CREATE TABLE IF NOT EXISTS auctions (
-  auction_id int NOT NULL,
-  item_id int NOT NULL,
+  auction_id int DEFAULT 0,
+  item_id int DEFAULT 0,
   reserve_price decimal(9,2) DEFAULT NULL,
   current_price decimal(9,2) DEFAULT NULL,
   start_date datetime DEFAULT NOW(),
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS auctions (
   CONSTRAINT fk_itemid_items FOREIGN KEY(item_id) references items(item_id));
   
 CREATE TABLE IF NOT EXISTS shirts (
-  item_id int NOT NULL,
+  item_id int DEFAULT 0,
   child bool DEFAULT NULL,
   shirt_size varchar(3) DEFAULT NULL,
   gender varchar(6) DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS shirts (
   CONSTRAINT fk_shirts_item_id FOREIGN KEY(item_id) references items(item_id));
   
 CREATE TABLE IF NOT EXISTS pants (
-  item_id int NOT NULL,
+  item_id int DEFAULT 0,
   child bool DEFAULT NULL,
   pants_size varchar(3) DEFAULT NULL,
   pants_type varchar(30) DEFAULT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS pants (
   CONSTRAINT fk_pants_item_id FOREIGN KEY(item_id) references items(item_id));
   
 CREATE TABLE IF NOT EXISTS footwear (
-  item_id int NOT NULL,
+  item_id int DEFAULT 0,
   child bool DEFAULT NULL,
   shoe_size decimal(3,1) DEFAULT NULL,
   width varchar(3) DEFAULT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS footwear (
 
 CREATE TABLE IF NOT EXISTS alerts(
   username varchar(30) NOT NULL DEFAULT '',
-  item_id int NOT NULL, 
+  item_id int DEFAULT 0, 
   price_min decimal(9,2) DEFAULT NULL,
   price_max decimal(9,2) DEFAULT NULL,
   PRIMARY KEY(username,item_id),
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS alerts(
 
 CREATE TABLE IF NOT EXISTS autoBid(
   username varchar(30) NOT NULL DEFAULT '',
-  auction_id int NOT NULL,
+  auction_id int DEFAULT 0,
   active_status bool DEFAULT NULL, 
   highest_price decimal(9,2) DEFAULT NULL,
   time_interval time DEFAULT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS autoBid(
 
 CREATE TABLE IF NOT EXISTS bidOn(
   username varchar(30) NOT NULL,
-  auction_id int NOT NULL,
+  auction_id int DEFAULT 0,
   date datetime NOT NULL,
   PRIMARY KEY(username, auction_id,date),
   CONSTRAINT fk_bidOn_user FOREIGN KEY(username) REFERENCES users(username),
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS ask(
 
 CREATE TABLE IF NOT EXISTS sells(
   username varchar(30) NOT NULL DEFAULT '',
-  auction_id int NOT NULL,
+  auction_id int DEFAULT 0,
   final_price decimal(9,2) DEFAULT NULL,
   PRIMARY KEY(username,auction_id),
   CONSTRAINT fk_sells_user FOREIGN KEY(username) REFERENCES users(username),
