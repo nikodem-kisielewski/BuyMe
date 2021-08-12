@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS shirts (
   shirt_size varchar(3) DEFAULT NULL,
   gender varchar(6) DEFAULT NULL,
   PRIMARY KEY(item_id),
-  CONSTRAINT fk_shirts_item_id FOREIGN KEY(item_id) references items(item_id));
+  CONSTRAINT fk_shirts_item_id FOREIGN KEY(item_id) references items(item_id) ON DELETE CASCADE);
   
 CREATE TABLE IF NOT EXISTS pants (
   item_id int DEFAULT 0,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS pants (
   style varchar(30) DEFAULT NULL,
   gender varchar(6) DEFAULT NULL,
   PRIMARY KEY(item_id),
-  CONSTRAINT fk_pants_item_id FOREIGN KEY(item_id) references items(item_id));
+  CONSTRAINT fk_pants_item_id FOREIGN KEY(item_id) references items(item_id) ON DELETE CASCADE);
   
 CREATE TABLE IF NOT EXISTS footwear (
   item_id int DEFAULT 0,
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS footwear (
   purpose varchar(30) DEFAULT NULL,
   gender varchar(6) DEFAULT NULL,
   PRIMARY KEY(item_id),
-  CONSTRAINT fk_footwear_item_id FOREIGN KEY(item_id) references items(item_id));
+  CONSTRAINT fk_footwear_item_id FOREIGN KEY(item_id) references items(item_id) ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS alerts(
   username varchar(30) NOT NULL DEFAULT '',
