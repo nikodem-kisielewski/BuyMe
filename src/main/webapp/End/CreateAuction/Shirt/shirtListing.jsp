@@ -36,7 +36,6 @@
 			</select></br>
 			Auction end date and time: <input type="datetime-local" name="endDate"/></br>
 			Minimum price (reserve): <input type="number" step="0.01" name="reservePrice"/></br>
-			<input type="hidden" name="today" value="">
 			<input type="submit" value="Submit"/>
 			</form>
 		</div>
