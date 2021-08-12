@@ -1,4 +1,5 @@
 <%@ page import ="java.sql.*" %>
+<%@ page import ="java.util.*" %>
 <%
 
 Class.forName("com.mysql.jdbc.Driver");
@@ -22,27 +23,38 @@ if (childString.equals("false")) {
 } else {
 	child = true;
 }
-String shirt_size = request.getParameter("size");
+String shirtSize = request.getParameter("size");
 String gender = request.getParameter("gender");
+
 String endDate = request.getParameter("endDate");
+String dateQuery = "select now() < ? properDate";
+PreparedStatement ps = con.prepareStatement(dateQuery);
+ps.setString(1, endDate);
+rs = ps.executeQuery();
+rs.next();
+Boolean properDate = rs.getBoolean("properDate");
+
 String reservePrice = request.getParameter("reservePrice");
 
-if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals("") || endDate.equals("") || reservePrice.equals("")) {
+if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals("") || endDate.equals("") || reservePrice.equals("")
+			|| reservePrice.equals("0") {
 	out.println("One of your entry fields is empty, please try again. <div><a href='shirtListing.jsp'>Try again</a></div>");
+} else if (!properDate) {
+	out.println("Auction end date is invalid, please try again. <div><a href='shirtListing.jsp'>Try again</a></div>");
 } else {
 	// Create the query and insert the proper values afterwards
 	String similarQuery = "select * from items natural left join shirts where item_condition = ? and manufacturing_location = ? and brand = ?" +
-				"and color = ? and material = ? and child = ? and shirt_size= ? and gender = ?";
+				"and color = ? and material = ? and child = ? and shirtSize= ? and gender = ?";
 
 	// Fill the prepared statement with the proper values
-	PreparedStatement ps = con.prepareStatement(similarQuery);
+	ps = con.prepareStatement(similarQuery);
 	ps.setString(1, itemCondition);
 	ps.setString(2, manLoc);
 	ps.setString(3, brand);
 	ps.setString(4, color);
 	ps.setString(5, material);
 	ps.setBoolean(6, child);
-	ps.setString(7, shirt_size);
+	ps.setString(7, shirtSize);
 	ps.setString(8, gender);
 
 	// Execute the prepared query
@@ -102,7 +114,7 @@ if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals
 		PreparedStatement addShirtStatement = con.prepareStatement(addShirtQuery);
 		addShirtStatement.setInt(1, newItemID);
 		addShirtStatement.setBoolean(2, child);
-		addShirtStatement.setString(3, shirt_size);
+		addShirtStatement.setString(3, shirtSize);
 		addShirtStatement.setString(4, gender);
 		
 		addShirtStatement.executeUpdate();
