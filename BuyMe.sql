@@ -8,17 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
   acct_type varchar(5) DEFAULT NULL,
   PRIMARY KEY(username));
 
-CREATE TABLE IF NOT EXISTS auctions (
-  auction_id int NOT NULL,
-  item_id int NOT NULL,
-  reserve_price decimal(9,2) DEFAULT NULL,
-  current_price decimal(9,2) DEFAULT NULL,
-  start_date datetime DEFAULT NOW(),
-  end_date datetime DEFAULT NULL,
-  upper_limit decimal(9,2) DEFAULT NULL,
-  PRIMARY KEY(auction_id),
-  CONSTRAINT fk_itemid_items FOREIGN KEY(item_id) references items(item_id));
-
 CREATE TABLE IF NOT EXISTS items (
   item_id int NOT NULL,
   name varchar(50) DEFAULT NULL,
@@ -30,6 +19,17 @@ CREATE TABLE IF NOT EXISTS items (
   material varchar(30) DEFAULT NULL,
   quantity int DEFAULT 0,
   PRIMARY KEY(item_id));
+
+CREATE TABLE IF NOT EXISTS auctions (
+  auction_id int NOT NULL,
+  item_id int NOT NULL,
+  reserve_price decimal(9,2) DEFAULT NULL,
+  current_price decimal(9,2) DEFAULT NULL,
+  start_date datetime DEFAULT NOW(),
+  end_date datetime DEFAULT NULL,
+  upper_limit decimal(9,2) DEFAULT NULL,
+  PRIMARY KEY(auction_id),
+  CONSTRAINT fk_itemid_items FOREIGN KEY(item_id) references items(item_id));
   
 CREATE TABLE IF NOT EXISTS shirts (
   item_id int NOT NULL,
