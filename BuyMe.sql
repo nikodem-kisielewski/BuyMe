@@ -10,12 +10,14 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS auctions (
   auction_id int NOT NULL,
+  item_id int NOT NULL,
   reserve_price decimal(9,2) DEFAULT NULL,
   current_price decimal(9,2) DEFAULT NULL,
   start_date datetime DEFAULT NOW(),
   end_date datetime DEFAULT NULL,
   upper_limit decimal(9,2) DEFAULT NULL,
-  PRIMARY KEY(auction_id));
+  PRIMARY KEY(auction_id),
+  CONSTRAINT fk_itemid_items FOREIGN KEY(item_id) references items(item_id));
 
 CREATE TABLE IF NOT EXISTS items (
   item_id int NOT NULL,
@@ -103,10 +105,3 @@ CREATE TABLE IF NOT EXISTS sells(
   PRIMARY KEY(username,auction_id),
   CONSTRAINT fk_sells_user FOREIGN KEY(username) REFERENCES users(username),
   CONSTRAINT fk_sells_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
-
-CREATE TABLE IF NOT EXISTS beingSold(
-  auction_id int NOT NULL,
-  item_id int NOT NULL,
-  PRIMARY KEY(auction_id, item_id),
-  CONSTRAINT fk_beingSold_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id),
-  CONSTRAINT fk_beingSold_item FOREIGN KEY(item_id) REFERENCES items(item_id));
