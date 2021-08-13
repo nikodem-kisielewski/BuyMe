@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS alerts (
 CREATE TABLE IF NOT EXISTS autoBid (
   username varchar(30) NOT NULL DEFAULT '',
   auction_id int DEFAULT 0,
-  active_status bool DEFAULT NULL, 
+  active_status bool DEFAULT true, 
   highest_price decimal(9,2) DEFAULT NULL,
   time_interval time DEFAULT NULL,
   PRIMARY KEY(username,auction_id),
