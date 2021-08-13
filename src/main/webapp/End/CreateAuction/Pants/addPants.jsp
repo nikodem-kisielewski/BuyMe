@@ -90,6 +90,8 @@ if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals
 		addAuctionStatement.setString(5, endDate);
 		
 		addAuctionStatement.executeUpdate();
+		
+		out.println("Your item has been listed. <a href='../../endMain.jsp'> Return to the main page.");
 			
 	} else {
 		
@@ -145,9 +147,10 @@ if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals
 		addAuctionStatement.setString(5, endDate);
 		
 		addAuctionStatement.executeUpdate();
+		
+		out.println("Your item has been listed. <a href='../../endMain.jsp'> Return to the main page.");
+		
 	}
 }
-
-out.println("Your item has been listed. <a href='../../endMain.jsp'> Return to the main page");
 
 %>
