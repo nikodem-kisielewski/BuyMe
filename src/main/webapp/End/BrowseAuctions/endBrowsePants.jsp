@@ -40,8 +40,10 @@ if (childString.equals("false")) {
 } else {
 	child = true;
 }
-String shirtSize = request.getParameter("size");
+String pantsSize = request.getParameter("size");
 String gender = request.getParameter("gender");
+String type = request.getParameter("type");
+String style = request.getParameter("style");
 String maxPrice = request.getParameter("maxPrice");
 
 // Create the strings to fill the query
@@ -69,10 +71,22 @@ if (material.equals("")) {
 	material = "'" + material + "'";
 }
 
-if (shirtSize.equals("any")) {
-	shirtSize = "shirt_size";
+if (pantsSize.equals("any")) {
+	pantsSize = "pants_size";
 } else {
-	shirtSize = "'" + shirtSize + "'";
+	pantsSize = "'" + pantsSize + "'";
+}
+
+if (type.equals("")) {
+	type = "pants_type";
+} else {
+	type = "'" + type + "'";
+}
+
+if (style.equals("")) {
+	style = "style";
+} else {
+	style = "'" + style + "'";
 }
 
 if (maxPrice.equals("")) {
@@ -80,10 +94,11 @@ if (maxPrice.equals("")) {
 }
 
 // Create the query and insert the proper values afterwards
-String similarQuery = "select * from auctions a natural join (select * from items i natural join shirts s" + 
-	" where i.item_id = s.item_id) s where a.item_id = s.item_id and now() < end_date and item_condition = " + itemCondition +
-	" and brand = " + brand + " and color = " + color + " and material = " + material + " and shirt_size = " + shirtSize +
-	" and current_price <= " + maxPrice + " and gender = " + "'" + gender + "'";
+String similarQuery = "select * from auctions a natural join (select * from items i natural join pants p" + 
+	" where i.item_id = p.item_id) p where a.item_id = p.item_id and now() < end_date and item_condition = " + itemCondition +
+	" and brand = " + brand + " and color = " + color + " and material = " + material + " and pants_size = " + pantsSize +
+	" and current_price <= " + maxPrice + " and gender = " + "'" + gender + "' and pants_type = " + type +
+	" and style = " + style;
 
 // Execute the prepared query
 rs = st.executeQuery(similarQuery);
@@ -91,7 +106,7 @@ rs = st.executeQuery(similarQuery);
 	
 // If there exists a similar item, update its quantity and create a new auction with that item
 if (rs.next()) { %>
-	<h1>List of shirt auctions</h1>
+	<h1>List of pants auctions</h1>
 		<form action="Bidding/bidOnItem.jsp" method="POST">
 		<table>
 			<tr>
@@ -101,6 +116,8 @@ if (rs.next()) { %>
 				<td><b>Color</b></td>
 				<td><b>Material</b></td>
 				<td><b>Size</b></td>
+				<td><b>Pants Type</b></td>
+				<td><b>Pants Style</b></td>
 				<td><b>Gender</b></td>
 				<td><b>Current Price</b></td>
 			</tr>
@@ -119,7 +136,9 @@ if (rs.next()) { %>
 				<td><%= rs.getString("brand") %></td>
 				<td><%= rs.getString("color") %></td>
 				<td><%= rs.getString("material") %></td>
-				<td><%= rs.getString("shirt_size") %></td>
+				<td><%= rs.getString("pants_size") %></td>
+				<td><%= rs.getString("pants_type") %></td>
+				<td><%= rs.getString("style") %></td>
 				<td><%= rs.getString("gender") %></td>
 				<td>$<%= rs.getString("current_price") %></td>
 				<td><input type="hidden" name="auctionID" value="<%= rs.getString("auction_id") %>">
@@ -142,7 +161,9 @@ if (rs.next()) { %>
 					<td><%= rs.getString("brand") %></td>
 					<td><%= rs.getString("color") %></td>
 					<td><%= rs.getString("material") %></td>
-					<td><%= rs.getString("shirt_size") %></td>
+					<td><%= rs.getString("pants_size") %></td>
+					<td><%= rs.getString("pants_type") %></td>
+					<td><%= rs.getString("style") %></td>
 					<td><%= rs.getString("gender") %></td>
 					<td>$<%= rs.getString("current_price") %></td>
 					<td><input type="hidden" name="auctionID" value="<%= rs.getString("auction_id") %>">
@@ -156,6 +177,6 @@ if (rs.next()) { %>
 	
 <% } else {
 	out.println("We could not find an auction with the parameters you specified, please try again." + 
-		"<div><a href='endShirtParameters.jsp'>Try again</a></div>");
+		"<div><a href='endPantsParameters.jsp'>Try again</a></div>");
 }
 %>

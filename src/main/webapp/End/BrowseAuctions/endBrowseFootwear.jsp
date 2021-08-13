@@ -40,7 +40,43 @@ if (childString.equals("false")) {
 } else {
 	child = true;
 }
-String shirtSize = request.getParameter("size");
+
+String shoeSize = request.getParameter("shoeSize");
+if (shoeSize.equals("")) {
+	shoeSize = "shoe_size";
+} else {
+	shoeSize = "'" + shoeSize + "'";
+}
+
+String shoeWidth = request.getParameter("width");
+if (shoeWidth.equals("any")) {
+	shoeWidth = "width";
+} else {
+	shoeWidth = "'" + shoeWidth + "'";
+}
+
+Boolean insole;
+String insoleString = request.getParameter("insole");
+if (insoleString.equals("False")) {
+	insole = false;
+} else {
+	insole = true;
+}
+
+String method = request.getParameter("method");
+if (method.equals("")) {
+	method = "securing_method";
+} else {
+	method = "'" + method + "'";
+}
+
+String purpose = request.getParameter("purpose");
+if (purpose.equals("")) {
+	purpose = "purpose";
+} else {
+	purpose = "'" + purpose + "'";
+}
+
 String gender = request.getParameter("gender");
 String maxPrice = request.getParameter("maxPrice");
 
@@ -69,21 +105,16 @@ if (material.equals("")) {
 	material = "'" + material + "'";
 }
 
-if (shirtSize.equals("any")) {
-	shirtSize = "shirt_size";
-} else {
-	shirtSize = "'" + shirtSize + "'";
-}
-
 if (maxPrice.equals("")) {
 	maxPrice = "current_price";
 }
 
 // Create the query and insert the proper values afterwards
-String similarQuery = "select * from auctions a natural join (select * from items i natural join shirts s" + 
-	" where i.item_id = s.item_id) s where a.item_id = s.item_id and now() < end_date and item_condition = " + itemCondition +
-	" and brand = " + brand + " and color = " + color + " and material = " + material + " and shirt_size = " + shirtSize +
-	" and current_price <= " + maxPrice + " and gender = " + "'" + gender + "'";
+String similarQuery = "select * from auctions a natural join (select * from items i natural join footwear f" + 
+	" where i.item_id = f.item_id) f where a.item_id = f.item_id and now() < end_date and item_condition = " + itemCondition +
+	" and brand = " + brand + " and color = " + color + " and material = " + material + " and shoe_size = " + shoeSize +
+	" and current_price <= " + maxPrice + " and gender = " + "'" + gender + "' and shoe_size = " + shoeSize +
+	" and width = " + shoeWidth + " and in_sole = " + insole + " and securing_method = " + method + " and purpose = " + purpose;
 
 // Execute the prepared query
 rs = st.executeQuery(similarQuery);
@@ -91,7 +122,7 @@ rs = st.executeQuery(similarQuery);
 	
 // If there exists a similar item, update its quantity and create a new auction with that item
 if (rs.next()) { %>
-	<h1>List of shirt auctions</h1>
+	<h1>List of footwear auctions</h1>
 		<form action="Bidding/bidOnItem.jsp" method="POST">
 		<table>
 			<tr>
@@ -101,6 +132,9 @@ if (rs.next()) { %>
 				<td><b>Color</b></td>
 				<td><b>Material</b></td>
 				<td><b>Size</b></td>
+				<td><b>Width</b>
+				<td><b>Securing Method</b></td>
+				<td><b>Purpose</b></td>
 				<td><b>Gender</b></td>
 				<td><b>Current Price</b></td>
 			</tr>
@@ -119,7 +153,10 @@ if (rs.next()) { %>
 				<td><%= rs.getString("brand") %></td>
 				<td><%= rs.getString("color") %></td>
 				<td><%= rs.getString("material") %></td>
-				<td><%= rs.getString("shirt_size") %></td>
+				<td><%= rs.getString("shoe_size") %></td>
+				<td><%= rs.getString("shoe_width") %></td>
+				<td><%= rs.getString("securing_method") %></td>
+				<td><%= rs.getString("purpose") %></td>
 				<td><%= rs.getString("gender") %></td>
 				<td>$<%= rs.getString("current_price") %></td>
 				<td><input type="hidden" name="auctionID" value="<%= rs.getString("auction_id") %>">
@@ -142,8 +179,10 @@ if (rs.next()) { %>
 					<td><%= rs.getString("brand") %></td>
 					<td><%= rs.getString("color") %></td>
 					<td><%= rs.getString("material") %></td>
-					<td><%= rs.getString("shirt_size") %></td>
-					<td><%= rs.getString("gender") %></td>
+					<td><%= rs.getString("shoe_size") %></td>
+					<td><%= rs.getString("shoe_width") %></td>
+					<td><%= rs.getString("securing_method") %></td>
+					<td><%= rs.getString("purpose") %></td>
 					<td>$<%= rs.getString("current_price") %></td>
 					<td><input type="hidden" name="auctionID" value="<%= rs.getString("auction_id") %>">
 						<input type="submit" value="Bid">
@@ -156,6 +195,6 @@ if (rs.next()) { %>
 	
 <% } else {
 	out.println("We could not find an auction with the parameters you specified, please try again." + 
-		"<div><a href='endShirtParameters.jsp'>Try again</a></div>");
+		"<div><a href='endFootwearParameters.jsp'>Try again</a></div>");
 }
 %>

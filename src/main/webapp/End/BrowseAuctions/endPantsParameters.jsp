@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>BuyMe Create Auction Page</title>
+		<title>Set Search Parameters</title>
 	</head>
 	<body>
-		<h1>Create a listing</h1>
+		<h1>Set your search parameters</h1>
+		<p>Leave text box entries blank for no restrictions.</p>
 		<div>
-		<form action="addPants.jsp" method="POST">
+		<form action="endBrowsePants.jsp" method="POST">
 			Name:	<input type="text" name="name"/><br/>
 			Condition:	<select name="condition" id="condition">
 				<option value="brandnew">Brand New</option>
@@ -23,6 +24,7 @@
 				<option value=true>Yes</option>
 			</select><br>
 			Size: <select name="size" id="size">
+				<option value="any">Any</option>
 				<option value="XS">XS</option>
 				<option value="S">S</option>
 				<option value="M">M</option>
@@ -36,8 +38,7 @@
 				<option value="Male">Male</option>
 				<option value="Female">Female</option>
 			</select><br>
-			Auction end date and time: <input type="datetime-local" name="endDate"/><br>
-			Minimum price (reserve): <input type="number" step="0.01" name="reservePrice"/><br>
+			Max price: <input type="number" step="5" name="maxPrice"><br>
 			<input type="submit" value="Submit"/>
 			</form>
 		</div>

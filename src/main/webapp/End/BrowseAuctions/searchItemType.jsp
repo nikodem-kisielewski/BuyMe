@@ -8,7 +8,7 @@
 		<div>
 		<a href="endShirtParameters.jsp">Shirt</a>
 		<a href="endPantsParameters.jsp">Pants</a>
-		<a href="endShoesParameters.jsp">Footwear</a>
+		<a href="endFootwearParameters.jsp">Footwear</a>
 		</div>
 	</body>
 </html>
