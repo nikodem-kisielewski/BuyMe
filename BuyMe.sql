@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS items (
   PRIMARY KEY(item_id));
 
 CREATE TABLE IF NOT EXISTS auctions (
+  seller varchar(30) NOT NULL DEFAULT '',
   auction_id int DEFAULT 0,
   item_id int DEFAULT 0,
   seller varchar(30),
@@ -61,7 +62,7 @@ CREATE TABLE IF NOT EXISTS footwear (
   PRIMARY KEY(item_id),
   CONSTRAINT fk_footwear_item_id FOREIGN KEY(item_id) references items(item_id) ON DELETE CASCADE);
 
-CREATE TABLE IF NOT EXISTS alerts(
+CREATE TABLE IF NOT EXISTS alerts (
   username varchar(30) NOT NULL DEFAULT '',
   item_id int DEFAULT 0, 
   price_min decimal(9,2) DEFAULT NULL,
@@ -70,7 +71,7 @@ CREATE TABLE IF NOT EXISTS alerts(
   CONSTRAINT fk_alerts_user FOREIGN KEY(username) REFERENCES users(username),
   CONSTRAINT fk_alerts_item FOREIGN KEY(item_id) REFERENCES items(item_id));
 
-CREATE TABLE IF NOT EXISTS autoBid(
+CREATE TABLE IF NOT EXISTS autoBid (
   username varchar(30) NOT NULL DEFAULT '',
   auction_id int DEFAULT 0,
   active_status bool DEFAULT NULL, 
@@ -80,7 +81,7 @@ CREATE TABLE IF NOT EXISTS autoBid(
   CONSTRAINT fk_autoBid_user FOREIGN KEY(username) REFERENCES users(username),
   CONSTRAINT fk_autoBid_item FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
 
-CREATE TABLE IF NOT EXISTS bidOn(
+CREATE TABLE IF NOT EXISTS bidOn (
   username varchar(30) NOT NULL,
   auction_id int DEFAULT 0,
   date datetime NOT NULL,
@@ -88,7 +89,7 @@ CREATE TABLE IF NOT EXISTS bidOn(
   CONSTRAINT fk_bidOn_user FOREIGN KEY(username) REFERENCES users(username),
   CONSTRAINT fk_bidOn_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
 
-CREATE TABLE IF NOT EXISTS ask(
+CREATE TABLE IF NOT EXISTS ask (
   customer_username varchar(30) NOT NULL DEFAULT '',
   representative_username varchar(30) NOT NULL DEFAULT '',
   date datetime NOT NULL,
@@ -98,7 +99,7 @@ CREATE TABLE IF NOT EXISTS ask(
   CONSTRAINT fk_ask_customer FOREIGN KEY(customer_username) REFERENCES users(username),
   CONSTRAINT fk_ask_representative FOREIGN KEY(representative_username) REFERENCES users(username));
 
-CREATE TABLE IF NOT EXISTS sells(
+CREATE TABLE IF NOT EXISTS sold (
   seller varchar(30) NOT NULL DEFAULT '',
   buyer varchar(30) NOT NULL DEFAULT '',
   auction_id int DEFAULT 0,
