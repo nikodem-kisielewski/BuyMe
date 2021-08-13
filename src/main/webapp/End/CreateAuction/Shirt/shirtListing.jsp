@@ -31,8 +31,8 @@
 				<option value="XXL">XXL</option>
 			</select></br>
 			Gender:	<select name="gender" id="gender">
-				<option value="male">Male</option>
-				<option value="female">Female</option>
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
 			</select></br>
 			Auction end date and time: <input type="datetime-local" name="endDate"/></br>
 			Minimum price (reserve): <input type="number" step="0.01" name="reservePrice"/></br>

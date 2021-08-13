@@ -7,6 +7,9 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe"
 Statement st = con.createStatement();
 ResultSet rs;
 
+// Get the username of the seller
+String seller = (String)session.getAttribute("user");
+
 // Get all of the parameters that the user entered
 String itemName = request.getParameter("name");
 String itemCondition = request.getParameter("condition");
@@ -37,14 +40,14 @@ Boolean properDate = rs.getBoolean("properDate");
 String reservePrice = request.getParameter("reservePrice");
 
 if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals("") || endDate.equals("") || reservePrice.equals("")
-			|| reservePrice.equals("0") {
+			|| reservePrice.equals("0")) {
 	out.println("One of your entry fields is empty, please try again. <div><a href='shirtListing.jsp'>Try again</a></div>");
 } else if (!properDate) {
 	out.println("Auction end date is invalid, please try again. <div><a href='shirtListing.jsp'>Try again</a></div>");
 } else {
 	// Create the query and insert the proper values afterwards
 	String similarQuery = "select * from items natural left join shirts where item_condition = ? and manufacturing_location = ? and brand = ?" +
-				"and color = ? and material = ? and child = ? and shirtSize= ? and gender = ?";
+				"and color = ? and material = ? and child = ? and shirt_size= ? and gender = ?";
 
 	// Fill the prepared statement with the proper values
 	ps = con.prepareStatement(similarQuery);
@@ -75,12 +78,13 @@ if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals
 		}
 		newAuctionID += 1;
 		
-		String addAuctionQuery = "insert into auctions values(?, ?, ?, 0, now(), convert(?, datetime))";
+		String addAuctionQuery = "insert into auctions values(?, ?, ?, ?, 0, now(), convert(?, datetime))";
 		PreparedStatement addAuctionStatement = con.prepareStatement(addAuctionQuery);
-		addAuctionStatement.setInt(1, newAuctionID);
-		addAuctionStatement.setInt(2, similarItemID);
-		addAuctionStatement.setString(3, reservePrice);
-		addAuctionStatement.setString(4, endDate);
+		addAuctionStatement.setString(1, seller);
+		addAuctionStatement.setInt(2, newAuctionID);
+		addAuctionStatement.setInt(3, similarItemID);
+		addAuctionStatement.setString(4, reservePrice);
+		addAuctionStatement.setString(5, endDate);
 		
 		addAuctionStatement.executeUpdate();
 			
@@ -127,15 +131,18 @@ if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals
 		}
 		newAuctionID += 1;
 		
-		String addAuctionQuery = "insert into auctions values(?, ?, convert(?, decimal(9,2)), 0, now(), convert(?, datetime))";
+		String addAuctionQuery = "insert into auctions values(?, ?, ?, convert(?, decimal(9,2)), 0, now(), convert(?, datetime))";
 		PreparedStatement addAuctionStatement = con.prepareStatement(addAuctionQuery);
-		addAuctionStatement.setInt(1, newAuctionID);
-		addAuctionStatement.setInt(2, newItemID);
-		addAuctionStatement.setString(3, reservePrice);
-		addAuctionStatement.setString(4, endDate);
+		addAuctionStatement.setString(1, seller);
+		addAuctionStatement.setInt(2, newAuctionID);
+		addAuctionStatement.setInt(3, newItemID);
+		addAuctionStatement.setString(4, reservePrice);
+		addAuctionStatement.setString(5, endDate);
 		
 		addAuctionStatement.executeUpdate();
 	}
 }
+
+out.println("Your item has been listed. <a href='../../endMain.jsp'> Return to the main page");
 
 %>
