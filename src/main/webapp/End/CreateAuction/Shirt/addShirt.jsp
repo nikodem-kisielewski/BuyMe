@@ -145,6 +145,6 @@ if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals
 	}
 }
 
-out.println("Your item has been listed. <a href='../../endMain.jsp'> Return to the main page");
+out.println("Your item has been listed. <a href='../../endMain.jsp'> Return to the main page.");
 
 %>

@@ -41,7 +41,7 @@ if (amountFloat <= currentPrice) {
 	
 	// TODO: Alerts
 	
-	out.prinln("Your bid has been successfully placed. <a href'../../endMain.jsp'></a>Return to the main page");
+	out.println("Your bid has been successfully placed. <a href='../../endMain.jsp'>Return to the main page.");
 	
 }
 
