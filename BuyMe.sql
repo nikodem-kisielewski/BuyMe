@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS items (
 CREATE TABLE IF NOT EXISTS auctions (
   auction_id int DEFAULT 0,
   item_id int DEFAULT 0,
+  seller varchar(30),
   reserve_price decimal(9,2) DEFAULT NULL,
   current_price decimal(9,2) DEFAULT NULL,
   start_date datetime DEFAULT NOW(),
@@ -98,9 +99,9 @@ CREATE TABLE IF NOT EXISTS ask(
   CONSTRAINT fk_ask_representative FOREIGN KEY(representative_username) REFERENCES users(username));
 
 CREATE TABLE IF NOT EXISTS sells(
-  username varchar(30) NOT NULL DEFAULT '',
+  seller varchar(30) NOT NULL DEFAULT '',
+  buyer varchar(30) NOT NULL DEFAULT '',
   auction_id int DEFAULT 0,
   final_price decimal(9,2) DEFAULT NULL,
   PRIMARY KEY(username,auction_id),
-  CONSTRAINT fk_sells_user FOREIGN KEY(username) REFERENCES users(username),
   CONSTRAINT fk_sells_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
