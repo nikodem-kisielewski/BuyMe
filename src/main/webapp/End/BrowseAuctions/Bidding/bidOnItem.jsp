@@ -41,13 +41,13 @@ String auctionID = request.getParameter("auctionID");
 		
 		String thisAuctionID = request.getParameter("auctionID");
 		
-		String thisAuctionQuery = "select * from auctions a natural join (select * from items i natural join shirts s" + 
+		// Check which kind of item the user is trying to bid on and display it
+		String isShirt = "select * from auctions a natural join (select * from items i natural join shirts s" + 
 				" where i.item_id = s.item_id) s where a.auction_id = '" + thisAuctionID + "' and a.item_id = s.item_id";
+		rs = st.executeQuery(isShirt);
 		
-		rs = st.executeQuery(thisAuctionQuery);
-		
-		%>
-		<table>
+		if (rs.next()) { %>
+			<table>
 			<tr>
 				<td><b>Name</b></td>
 				<td><b>Condition</b></td>
@@ -58,7 +58,6 @@ String auctionID = request.getParameter("auctionID");
 				<td><b>Gender</b></td>
 				<td><b>Current Price</b></td>
 			</tr>
-		<% while (rs.next()) { %>
 			<tr>
 				<td><%= rs.getString("name") %></td>
 					
@@ -74,26 +73,116 @@ String auctionID = request.getParameter("auctionID");
 				<td><%= rs.getString("brand") %></td>
 				<td><%= rs.getString("color") %></td>
 				<td><%= rs.getString("material") %></td>
-				<!--<% //rs.getString("shirt_size") %></td> <td> -->
+				<td><%= rs.getString("shirt_size") %></td>
 				<td><%= rs.getString("gender") %></td>
 				<td>$<%= rs.getString("current_price") %></td>
 			</tr>
-		<% } %>
+			</table>
+		<% }
+		
+		String isPants = "select * from auctions a natural join (select * from items i natural join pants p" + 
+			" where i.item_id = p.item_id) p where a.auction_id = '" + thisAuctionID + "' and a.item_id = p.item_id";
+		rs = st.executeQuery(isPants);
+		
+		if (rs.next()) { %>
+			<table>
+			<tr>
+				<td><b>Name</b></td>
+				<td><b>Condition</b></td>
+				<td><b>Brand</b></td>
+				<td><b>Color</b></td>
+				<td><b>Material</b></td>
+				<td><b>Size</b></td>
+				<td><b>Pants Type</b></td>
+				<td><b>Pants Style</b></td>
+				<td><b>Gender</b></td>
+				<td><b>Current Price</b></td>
+			</tr>
+			<tr>
+				<td><%= rs.getString("name") %></td>
+				
+					<!-- Make text user friendly for item condition -->
+					<% if (rs.getString("item_condition").equals("brandnew")) {
+						%> <td>Brand New</td> <% 
+					} else if (rs.getString("item_condition").equals("good")) {
+						%> <td>Good</td> <%
+					} else {
+						%> <td>Fair</td> <%
+					} %>
+					
+				<td><%= rs.getString("brand") %></td>
+				<td><%= rs.getString("color") %></td>
+				<td><%= rs.getString("material") %></td>
+				<td><%= rs.getString("pants_size") %></td>
+				<td><%= rs.getString("pants_type") %></td>
+				<td><%= rs.getString("style") %></td>
+				<td><%= rs.getString("gender") %></td>
+				<td>$<%= rs.getString("current_price") %></td>
+			</tr>
 		</table>
+		<% }
+		
+		String isShoes = "select * from auctions a natural join (select * from items i natural join footwear s" + 
+			" where i.item_id = s.item_id) s where a.auction_id = '" + thisAuctionID + "' and a.item_id = s.item_id";
+		rs = st.executeQuery(isShoes);
+		
+		if (rs.next()) { %>
+			<table>
+			<tr>
+				<td><b>Name</b></td>
+				<td><b>Condition</b></td>
+				<td><b>Brand</b></td>
+				<td><b>Color</b></td>
+				<td><b>Material</b></td>
+				<td><b>Size</b></td>
+				<td><b>Width</b>
+				<td><b>Securing Method</b></td>
+				<td><b>Purpose</b></td>
+				<td><b>Gender</b></td>
+				<td><b>Current Price</b></td>
+			</tr>
+			<tr>
+				<td><%= rs.getString("name") %></td>
+				
+					<!-- Make text user friendly for item condition -->
+					<% if (rs.getString("item_condition").equals("brandnew")) {
+						%> <td>Brand New</td> <% 
+					} else if (rs.getString("item_condition").equals("good")) {
+						%> <td>Good</td> <%
+					} else {
+						%> <td>Fair</td> <%
+					} %>
+					
+				<td><%= rs.getString("brand") %></td>
+				<td><%= rs.getString("color") %></td>
+				<td><%= rs.getString("material") %></td>
+				<td><%= rs.getString("shoe_size") %></td>
+				<td><%= rs.getString("width") %></td>
+				<td><%= rs.getString("securing_method") %></td>
+				<td><%= rs.getString("purpose") %></td>
+				<td><%= rs.getString("gender") %></td>
+				<td>$<%= rs.getString("current_price") %></td>
+			</tr>
+			</table>
+		<% } %>
 		
 		<h2>Normal bid</h2>
+		<p>This will submit a normal bid. You will be alerted if you are outbid.</p>
 		<form action="checkRegBid.jsp" method="POST">
 			<input type="number" step="0.01" name="bidAmount"><br>
 			<input type="hidden" name="auctionID" value="auctionID">
 			<input type="submit" value="Submit Bid">
 		</form>
 		<h2>Autobid</h2>
+		<p>Autobids are like normal bids that are automated for you. If you are outbid on an auction, the autobid system will automatically place a new bid for you.
+		This system will continue to bid for you until the current bid on the item exceeds the maximum price of your desired maximum bid.<p>
 		<form action="checkAutoBid.jsp" method="POST">
 			<p>This field determines how much your bids will increment with each autobid made on the item.</p>
 			Bid increment: <input type="number" step="0.01" name="bidIncrement"><br>
 			<p>This field determines the maximum price the autobid will bid on an item.</p>
 			Maximum price: <input type="number" step="0.01" name="maxPrice"><br>
-			<input type="hidden" name="auctionID" value="<% thisAuctionID %>">
+			<input type="hidden" name="auctionID" value="<%= thisAuctionID %>">
+			<input type="submit" value="Create Autobid">
 		</form>
 	</div>
 </html>

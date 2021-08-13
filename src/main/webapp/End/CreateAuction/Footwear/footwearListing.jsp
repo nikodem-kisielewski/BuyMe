@@ -24,9 +24,9 @@
 			</select><br>
 			Shoe Size: <input type="number" step="0.5" name="shoeSize"><br>
 			Shoe Width: <select name="width" id="width">
-				<option value="narrow">Narrow</option>
-				<option value="normal">Normal</option>
-				<option value="wide">Wide</option>
+				<option value="Narrow">Narrow</option>
+				<option value="Normal">Normal</option>
+				<option value="Wide">Wide</option>
 			</select><br>
 			Has an insole?: <select name="insole" id="insole">
 				<option value="false">No</option>
