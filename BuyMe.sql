@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS auctions (
   seller varchar(30) NOT NULL DEFAULT '',
   auction_id int DEFAULT 0,
   item_id int DEFAULT 0,
-  seller varchar(30),
   reserve_price decimal(9,2) DEFAULT NULL,
   current_price decimal(9,2) DEFAULT NULL,
   start_date datetime DEFAULT NOW(),
@@ -85,6 +84,7 @@ CREATE TABLE IF NOT EXISTS bidOn (
   username varchar(30) NOT NULL,
   auction_id int DEFAULT 0,
   date datetime NOT NULL,
+  amount decimal(9, 2), DEFAULT 0,
   PRIMARY KEY(username, auction_id,date),
   CONSTRAINT fk_bidOn_user FOREIGN KEY(username) REFERENCES users(username),
   CONSTRAINT fk_bidOn_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
@@ -104,5 +104,6 @@ CREATE TABLE IF NOT EXISTS sold (
   buyer varchar(30) NOT NULL DEFAULT '',
   auction_id int DEFAULT 0,
   final_price decimal(9,2) DEFAULT NULL,
-  PRIMARY KEY(username,auction_id),
-  CONSTRAINT fk_sells_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
+  PRIMARY KEY(seller,auction_id),
+  CONSTRAINT fk_sold_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id),
+  CONSTRAINT fk_sold_auction FOREIGN KEY(seller) REFERENCES userss(username));
