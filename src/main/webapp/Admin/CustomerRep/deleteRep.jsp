@@ -4,7 +4,7 @@
       <title>Customer Representative Deletion</title>
    </head>
    <body>
-   <h1>Customer Representative Creation</h1>
+   <h1>Customer Representative Deletion</h1>
      <form action="repRemoval.jsp" method="POST">
        Rep Username:	<input type="text" name="username"/> <br/>
        <input type="submit" value="Submit"/>

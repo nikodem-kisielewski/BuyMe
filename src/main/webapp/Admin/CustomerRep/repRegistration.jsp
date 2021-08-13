@@ -2,6 +2,7 @@
 <%
     String userid = request.getParameter("username");   
     String pwd = request.getParameter("password");
+    String name = request.getParameter("name");
     
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "rootpass");
@@ -22,19 +23,21 @@
     
     // Insert the new user into the database
     else {
-    	String query = "insert into users (username, password, acct_type) values (?, ?, ?)";
+    	String query = "insert into users values (?, ?, ?, ?)";
     	PreparedStatement ps = con.prepareStatement(query);
     	
 		ps.setString(1, userid);
 		ps.setString(2, pwd);
+		ps.setString(3, name);
 		// User account type is end user by default
-		ps.setString(3, "rep");
+		ps.setString(4, "rep");
 		ps.executeUpdate();
 		con.close();
 		
         session.setAttribute("user", userid); // the username will be stored in the session
-        out.println("welcome " + userid);
-        out.println("<div><a href='logout.jsp'>Log out</a></div>");
-        response.sendRedirect("../adminMain.jsp");
+        out.println("Account with username " + "'" + userid + "'" + " was successful");
+        %>
+		</br>
+		<a href='../adminMain.jsp'>Go back to Admin Main Page</a><%
     }
 %>

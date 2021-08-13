@@ -1,7 +1,9 @@
 <%@ page import ="java.sql.*" %>
 <%
     String userid = request.getParameter("username");   
-    
+    if(userid.equals("rep")){
+    	%>Hello There</br><%
+    }
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "rootpass");
     Statement st = con.createStatement();
@@ -22,6 +24,9 @@
     	PreparedStatement ps = con.prepareStatement(query);
 		ps.executeUpdate();
 		con.close();
-        response.sendRedirect("../adminMain.jsp");
+		out.print("Deletion of Customer Representative " +"'"+userid + "'" +" was successful");
+		%>
+		</br>
+		<a href='../adminMain.jsp'>Go back to Admin Main Page</a><%
     }
 %>
