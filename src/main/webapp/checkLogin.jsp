@@ -21,10 +21,10 @@
         String type = rs.getString("acct_type");
         if (type.equals("end")) {
         	response.sendRedirect("End/endMain.jsp");	
-        } else if (type == "rep") {
-        	response.sendRedirect("rep/repMain.jsp");
+        } else if (type.equals("rep")) {
+        	response.sendRedirect("Rep/repMain.jsp");
         } else {
-        	response.sendRedirect("admin/adminMain.jsp");
+        	response.sendRedirect("Admin/adminMain.jsp");
         }
         
     // If not in the database, give the user an error message
