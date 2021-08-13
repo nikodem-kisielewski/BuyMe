@@ -154,7 +154,7 @@ if (rs.next()) { %>
 				<td><%= rs.getString("color") %></td>
 				<td><%= rs.getString("material") %></td>
 				<td><%= rs.getString("shoe_size") %></td>
-				<td><%= rs.getString("shoe_width") %></td>
+				<td><%= rs.getString("width") %></td>
 				<td><%= rs.getString("securing_method") %></td>
 				<td><%= rs.getString("purpose") %></td>
 				<td><%= rs.getString("gender") %></td>
@@ -180,7 +180,7 @@ if (rs.next()) { %>
 					<td><%= rs.getString("color") %></td>
 					<td><%= rs.getString("material") %></td>
 					<td><%= rs.getString("shoe_size") %></td>
-					<td><%= rs.getString("shoe_width") %></td>
+					<td><%= rs.getString("width") %></td>
 					<td><%= rs.getString("securing_method") %></td>
 					<td><%= rs.getString("purpose") %></td>
 					<td>$<%= rs.getString("current_price") %></td>
