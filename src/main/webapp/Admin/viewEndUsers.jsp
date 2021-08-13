@@ -1,22 +1,23 @@
 <!DOCTYPE html>
+ <%@ page import ="java.sql.*" %>
 <html>
 <head>
-    <title>Sales Report</title>
-    <%@ page import ="java.sql.*" %>
+    <title>List Of End Users</title>
+   
 </head>
 <body bgcolor=white>
-    <% 	String userid = request.getParameter("data_type");   
-        Class.forName("com.mysql.jdbc.Driver");
+    <%  Class.forName("com.mysql.jdbc.Driver");
   
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "rootpass");
         Statement st=con.createStatement();
-        ResultSet rs=st.executeQuery("select sum(final_price) as total from sold;");%>
+        ResultSet rs=st.executeQuery("select * from users where acct_type=" +"'end';");%>
         
         <table border=1 style="text-align:center">
       <thead>
           <tr>
-             <th>Total</th>
-      
+             <th>Username</th>
+              <th>Password</th>
+               <th>Name</th>
           </tr>
       </thead>
       <tbody>
@@ -25,12 +26,14 @@
         {
             %>
             <tr>
-                <td><%=rs.getString("total") %></td>
+                <td><%=rs.getString("username") %></td>
+                <td><%=rs.getString("password") %></td>
+                <td><%=rs.getString("name") %></td>
             
             </tr>
             <%}%>
            </tbody>
         </table><br>
-       <a href='generateSalesReport.jsp'>Go back to Generate Sales Report Page</a>
+       <a href='adminMain.jsp'>Go back to Admin Main Page</a>
         <%con.close();%>
 </body>
