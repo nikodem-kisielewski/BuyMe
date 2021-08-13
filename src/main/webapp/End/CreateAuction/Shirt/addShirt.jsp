@@ -87,6 +87,8 @@ if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals
 		addAuctionStatement.setString(5, endDate);
 		
 		addAuctionStatement.executeUpdate();
+		
+		// TODO: Alerts
 			
 	} else {
 		

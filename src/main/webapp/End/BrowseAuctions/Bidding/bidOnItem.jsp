@@ -1,8 +1,5 @@
 <%@ page import ="java.sql.*" %>
 <%@ page import ="java.util.*" %>
-<%
-String auctionID = request.getParameter("auctionID");
-%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -54,7 +51,7 @@ String auctionID = request.getParameter("auctionID");
 				<td><b>Brand</b></td>
 				<td><b>Color</b></td>
 				<td><b>Material</b></td>
-				<!-- <td><b>Size</b></td> -->
+				<td><b>Size</b></td>
 				<td><b>Gender</b></td>
 				<td><b>Current Price</b></td>
 			</tr>
@@ -170,7 +167,7 @@ String auctionID = request.getParameter("auctionID");
 		<p>This will submit a normal bid. You will be alerted if you are outbid.</p>
 		<form action="checkRegBid.jsp" method="POST">
 			<input type="number" step="0.01" name="bidAmount"><br>
-			<input type="hidden" name="auctionID" value="auctionID">
+			<input type="hidden" name="auctionID" value="<%= thisAuctionID %>">
 			<input type="submit" value="Submit Bid">
 		</form>
 		<h2>Autobid</h2>
