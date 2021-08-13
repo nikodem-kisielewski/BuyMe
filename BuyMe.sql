@@ -8,6 +8,9 @@ CREATE TABLE IF NOT EXISTS users (
   acct_type varchar(5) DEFAULT NULL,
   PRIMARY KEY(username));
 
+INSERT INTO users
+VALUES ("admin","adminpass","Steve","admin");
+
 CREATE TABLE IF NOT EXISTS items (
   item_id int DEFAULT 0,
   name varchar(50) DEFAULT NULL,
