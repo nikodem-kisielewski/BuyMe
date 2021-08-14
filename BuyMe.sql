@@ -114,3 +114,12 @@ CREATE TABLE IF NOT EXISTS sold (
   CONSTRAINT fk_sold_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id),
   CONSTRAINT fk_sold_seller FOREIGN KEY(seller) REFERENCES users(username),
   CONSTRAINT fk_sold_buyer FOREIGN KEY(buyer) REFERENCES users(username));
+  
+CREATE TABLE IF NOT EXISTS desiredItems (
+  item_id int DEFAULT 0,
+  username varchar(30) NOT NULL DEFAULT '',
+  PRIMARY KEY(item_id,username),
+  CONSTRAINT fk_desiredItems_item FOREIGN KEY(item_id) REFERENCES items(item_id),
+  CONSTRAINT fk_desiredItems_user FOREIGN KEY(username) REFERENCES users(username));
+      
+    
