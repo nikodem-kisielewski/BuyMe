@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS users (
   username varchar(30) NOT NULL DEFAULT '',
   password varchar(30) NOT NULL DEFAULT '',
   name varchar(50) DEFAULT NULL,
-  last_login datetime DEFAULT NULL,
   acct_type varchar(5) DEFAULT NULL,
+  last_login datetime DEFAULT now(),
   PRIMARY KEY(username));
 
 INSERT INTO users
