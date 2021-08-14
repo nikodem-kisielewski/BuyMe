@@ -6,10 +6,8 @@
     
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "rootpass");
-    
     Statement st = con.createStatement();
     ResultSet rs;
-    rs = st.executeQuery("select * from users where username='" + userid + "' and password='" + pwd + "'");
     
     // Update all auction information
     String doneAuctionQuery = "select * from auctions a natural join bidOn b natural join items where now() > a.end_date and a.auction_id = b.auction_id and current_price = amount";
@@ -35,7 +33,7 @@
     		st.executeUpdate("insert into sold values(" + seller + ", " + winner + ", " + thisAuction + ", " + currentPrice + ")");
     		
     		// Alert the winner of the auction
-    		st.executeUpdate("insert into alerts values (" + winner + ", You have won " + itemName + "for $" + currentPrice + "!, 'won')");
+    		st.executeUpdate("insert into alerts values (" + winner + ", You have won " + itemName + "for $" + currentPrice + "!, 'won', now())");
     				
     		// Update the item quantity of the item that has been sold
     		st.executeUpdate("update items set quantity = quantity - 1 where item_id = " + soldItem);
@@ -44,6 +42,8 @@
     		st.executeUpdate("update autoBid set active_status = false where auction_id = " + thisAuction);
     	}
     }
+    
+    rs = st.executeQuery("select * from users where username='" + userid + "' and password='" + pwd + "'");
     
     // Check if the username and corresponding password are in the database
     if (rs.next()) {
