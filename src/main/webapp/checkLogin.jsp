@@ -20,6 +20,7 @@
     
     while (rs.next()) {
     	itemName = rs.getString("name");
+    	soldItem = rs.getInt("item_id");
     	seller = rs.getString("seller");
     	winner = rs.getString("username");
     	thisAuction = rs.getInt("auction_id");
@@ -35,6 +36,7 @@
     		
     		// Alert the winner of the auction
     		st.executeUpdate("insert into alerts values (" + winner + ", You have won " + itemName + "for $" + currentPrice + "!, 'won')");
+    		st.executeUpdate("update items set quantity = quantity - 1 where item_id = " + soldItem);
     	}
     }
     
