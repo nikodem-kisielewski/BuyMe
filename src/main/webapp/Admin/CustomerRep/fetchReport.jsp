@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jsp Sample</title>
+    <title>Fetch Report</title>
     <%@page import="java.sql.*;"%>
 </head>
 <body bgcolor=yellow>
