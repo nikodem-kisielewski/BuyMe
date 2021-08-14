@@ -49,7 +49,25 @@ if (amountFloat <= currentPrice) {
 	ps.setInt(2, thisAuction);
 	ps.executeUpdate();
 	
-	// TODO: Alerts
+	// Find the current highest bidder among all of the autobids
+	ResultSet numAuto = st.executeQuery("select count(username) autoBidders from autobid b, auctions a where a.auction_id = b.auction_id");
+	numAuto.next();
+	if (rs.getInt("autoBidders") < 2) {
+		
+	}
+	
+	// Find all of the users that have been outbid
+	String outBidUser, itemName;
+	ResultSet outBidSet = st.executeQuery("select distinct username from bidOn where amount < (select max(amount) from bidOn) and username not in autoBid");
+	ResultSet itemSet = st.executeQuery("select name from auctions a, items i where a.auction_id = " + thisAuction + "and a.item_id = i.item_id");
+	itemSet.next();
+	
+	// Make an alert for all of the users that have been outbid
+	while (outBidSet.next()) {
+		itemName = itemSet.getString("name");
+		outBidUser = outBidSet.getString("username");
+		st.executeUpdate("insert into alerts values(" + outBidUser + ", You have been outbid on " + itemName + "!, 'outbid'");
+	}
 	
 	out.println("Your bid has been successfully placed. <a href='../../endMain.jsp'>Return to the main page.</a>");
 	
