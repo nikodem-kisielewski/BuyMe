@@ -7,35 +7,27 @@
 		<h1>Generate Sales Report</h1>
 		<div>
 		<form action="fetchReport.jsp" method="POST">
-Data Type: <select size="1" id="data_type" title="" name="Data Type">
+Choose Data Type: <select size="1" id="data_type" title="" name="data_type">
 				<option value="total_earnings">Total Earnings</option>
-				<option value="earnings_by_category">Earnings By Category</option>
 				<option value="best_items">Best Items</option>
 				<option value="best_sellers">Best Sellers</option>
 			</select></br>
-			<script type="text/javascript">
-			$(document).ready(function() {
-			    $('#data_type').bind('change', function() {
-			        var elements = $('div.container').children().hide(); // hide all the elements
-			        var value = $(this).val();
-
-			        if (value.length) { // if somethings' selected
-			            elements.filter('.' + value).show(); // show the ones we want
-			        }
-			    }).trigger('change');
-			});
-			</script>
-
-			<div id="div1" style="display:none">
-				<select size="1" id="val_type" title="" name="Value Type">
-				<option value="item_id">By Item ID</option>
-				<option value="item_type">By Item Type</option>
-				<option value="seller_id">By Username</option>
-			</select></br>
-			Info: <input type="text" name="info"/> <br/>
+			 <input type="submit" value="Submit"/></br><br><br>
+			 </form>
+Or Search by Item or User: 
+		<form action="obtainSalesInfo.jsp" method="POST">
+   <p> Choose a specification:</p>
+        <input type="radio" id="item_id" name="specification" value="item_id">
+        <label for="buyer">By Item ID</label><br>
+         <input type="radio" id="item_type" name="specification" value="item_type">
+         <label for="seller">By Item Type</label><br>
+         <input type="radio" id="seller" name="specification" value="seller">
+         <label for="seller">By Seller Username</label><br><br>
+       <input type="submit" value="Submit"/>
+     </form><br><br>
+			 <a href='adminMain.jsp'>Go back to Admin Main Page</a>
+			 
 			</div>
-			<input type="submit" value="Submit"/>
-			</form>
-		</div>
+			
 	</body>
 </html>
