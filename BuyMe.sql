@@ -107,4 +107,5 @@ CREATE TABLE IF NOT EXISTS sold (
   final_price decimal(9,2) DEFAULT NULL,
   PRIMARY KEY(seller,auction_id),
   CONSTRAINT fk_sold_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id),
-  CONSTRAINT fk_sold_auction FOREIGN KEY(seller) REFERENCES users(username));
+  CONSTRAINT fk_sold_seller FOREIGN KEY(seller) REFERENCES users(username),
+  CONSTRAINT fk_sold_buyer FOREIGN KEY(buyer) REFERENCES users(username));
