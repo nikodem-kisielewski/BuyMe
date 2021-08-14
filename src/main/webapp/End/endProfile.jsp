@@ -4,10 +4,10 @@
       <title><%session.getAttribute("user").toString();%>'s Profile</title>
    </head>
    <body>
-  <h1><%session.getAttribute("user").toString();%>'s Profile</h1>
-  <a href='viewAuctionHistory.jsp'>View Auction History</a><br>
-  <a href='viewBidHistory.jsp'>View Bid History</a><br>
-  
+  <h1><%=session.getAttribute("user").toString()%>'s Profile</h1>
+    <h3><a href='viewBidHistory.jsp'>View Bid History</a></h3>
+    
+  <h3> <a href='viewAuctionHistory.jsp'>View Auction History</a></h3>
   <h3>Change Name</h3>
 	<form action="endChangeName.jsp" method="POST">
        New Name: <input type="text" name="name"/> <br/>
@@ -27,8 +27,8 @@
        Old Password:	<input type="password" name="old_pass"/> <br/>
        New Password: <input type="password" name="new_pass1"/> <br/>
        Repeat New Password: <input type="password" name="new_pass2"/> <br/>
-       <input type="submit" value="Submit Password Change"/>
-       <div>
+       <input type="submit" value="Submit Password Change"/><br>
+       <div><br>
        		<a href='endMain.jsp'>Go back to Buy Me Main Page</a>
        </div>
      </form>
