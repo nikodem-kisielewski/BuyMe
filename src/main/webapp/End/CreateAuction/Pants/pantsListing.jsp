@@ -40,7 +40,6 @@
 			Minimum price (reserve): <input type="number" step="0.01" name="reservePrice"/><br>
 			<input type="submit" value="Submit"/>
 			</form>
-			<a href='../itemType.jsp'>Go back to Item Selection Page</a>
 		</div>
 	</body>
 </html>
