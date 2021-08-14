@@ -1,12 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+   <head>
+      <title>Edit End User Account</title>
+   </head>
+   <body>
+   <h1>Edit End User Account</h1>
+     <form action="performChange.jsp" method="POST">
+       Old Username:	<input type="text" name="old_user"/> <br/>
+       New Username: <input type="text" name="new_user"/> <br/>
+       New Password: <input type="text" name="pass"/> <br/>
+       New Name: <input type="text" name="name"/> <br/>
+       <input type="submit" value="Submit"/>
+       <div>
+       		<a href='../repMain.jsp'>Go back to Customer Representative Main Page</a>
+       </div>
+     </form>
+   </body>
 </html>
