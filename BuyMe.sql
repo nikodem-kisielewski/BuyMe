@@ -11,6 +11,9 @@ CREATE TABLE IF NOT EXISTS users (
 INSERT INTO users
 VALUES ("admin","adminpass","Steve","admin");
 
+INSERT INTO users
+VALUES ("rep1","reppass","Mike","rep");
+
 CREATE TABLE IF NOT EXISTS items (
   item_id int DEFAULT 0,
   name varchar(50) DEFAULT NULL,
