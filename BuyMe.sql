@@ -66,18 +66,17 @@ CREATE TABLE IF NOT EXISTS footwear (
 
 CREATE TABLE IF NOT EXISTS alerts (
   username varchar(30) NOT NULL DEFAULT '',
-  item_id int DEFAULT 0, 
-  price_min decimal(9,2) DEFAULT NULL,
-  price_max decimal(9,2) DEFAULT NULL,
-  PRIMARY KEY(username,item_id),
-  CONSTRAINT fk_alerts_user FOREIGN KEY(username) REFERENCES users(username),
-  CONSTRAINT fk_alerts_item FOREIGN KEY(item_id) REFERENCES items(item_id));
+  alert_message varchar(100) NOT NULL DEFAULT '', 
+  alert_type varchar(10) DEFAULT NULL,
+  PRIMARY KEY(username,alert_message),
+  CONSTRAINT fk_alerts_user FOREIGN KEY(username) REFERENCES users(username));
 
 CREATE TABLE IF NOT EXISTS autoBid (
   username varchar(30) NOT NULL DEFAULT '',
   auction_id int DEFAULT 0,
-  active_status bool DEFAULT true, 
+  active_status bool DEFAULT NULL, 
   highest_price decimal(9,2) DEFAULT NULL,
+  time_interval time DEFAULT NULL,
   PRIMARY KEY(username,auction_id),
   CONSTRAINT fk_autoBid_user FOREIGN KEY(username) REFERENCES users(username),
   CONSTRAINT fk_autoBid_item FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
@@ -108,4 +107,4 @@ CREATE TABLE IF NOT EXISTS sold (
   final_price decimal(9,2) DEFAULT NULL,
   PRIMARY KEY(seller,auction_id),
   CONSTRAINT fk_sold_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id),
-  CONSTRAINT fk_sold_users FOREIGN KEY(seller) REFERENCES users(username));
+  CONSTRAINT fk_sold_auction FOREIGN KEY(seller) REFERENCES users(username));
