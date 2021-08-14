@@ -103,10 +103,8 @@ CREATE TABLE IF NOT EXISTS ask (
   question varchar(200) DEFAULT NULL,
   answer varchar(200) DEFAULT NULL,
   PRIMARY KEY(customer_username,representative_username,date),
-  CONSTRAINT fk_ask_customer FOREIGN KEY(customer_username) REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE);,
-  CONSTRAINT fk_ask_representative FOREIGN KEY(representative_username) REFERENCES users(username),
-  ON UPDATE CASCADE,
-  ON DELETE CASCADE);
+  CONSTRAINT fk_ask_customer FOREIGN KEY(customer_username) REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT fk_ask_representative FOREIGN KEY(representative_username) REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS sold (
   seller varchar(30) NOT NULL DEFAULT '',
