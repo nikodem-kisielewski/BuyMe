@@ -3,8 +3,11 @@
 
 String bidder = (String)session.getAttribute("user");
 
-String bidAmount = request.getParameter("bidAmount");
-float amountFloat = Float.parseFloat(bidAmount);
+String bidIncrement = request.getParameter("bidIncrement");
+float incrementFloat = Float.parseFloat(bidIncrement);
+
+String maxPrice = request.getParameter("maxPrice");
+float maxFloat = Float.parseFloat(maxPrice);
 
 String thisAuctionString = request.getParameter("auctionID");
 int thisAuction = Integer.parseInt(thisAuctionString);
@@ -28,26 +31,32 @@ if (timeSet.getString("goodTime").equals("0")) {
 	out.println("Error: this auction has ended. <div><a href'../../endMain.jsp'>Return to the main page.</a>");
 }
 
-if (amountFloat <= currentPrice) {
+if (maxFloat <= currentPrice) {
 	
-	out.println("Your bid must be larger than the current price of the auction. <div><a href='bidOnItem.jsp?auctionID=" +
+	out.println("Your maximum price must be larger than the current price of the auction. <div><a href='bidOnItem.jsp?auctionID=" +
 		thisAuctionString + "'Try again.</a></div>");
 
 
 } else {
 	
-	String addBid = "insert into bidOn values(?, ?, now(), ?)";
-	PreparedStatement ps = con.prepareStatement(addBid);
+	String addAutobid = "insert into autoBid values(?, ?, true, ?)";
+	PreparedStatement ps = con.prepareStatement(addAutobid);
 	ps.setString(1, bidder);
 	ps.setInt(2, thisAuction);
-	ps.setFloat(3, amountFloat);
+	ps.setFloat(3, maxFloat);
 	ps.executeUpdate();
 	
 	String updatePrice = "update auctions set current_price = ? where auction_id = ?";
 	ps = con.prepareStatement(updatePrice);
-	ps.setFloat(1, amountFloat);
+	ps.setFloat(1, currentPrice + incrementFloat);
 	ps.setInt(2, thisAuction);
 	ps.executeUpdate();
+	
+	String addBid = "insert into bidOn values(?, ?, now(), ?)";
+	ps = con.prepareStatement(addBid);
+	ps.setString(1, bidder);
+	ps.setInt(2, thisAuction);
+	ps.setFloat(3, currentPrice + incrementFloat);
 	
 	// TODO: Alerts
 	
