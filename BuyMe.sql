@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS autoBid (
   auction_id int DEFAULT 0,
   active_status bool DEFAULT NULL, 
   highest_price decimal(9,2) DEFAULT NULL,
-  time_interval time DEFAULT NULL,
+  bid_interval decimal(9,2) DEFAULT NULL,
   PRIMARY KEY(username,auction_id),
   CONSTRAINT fk_autoBid_user FOREIGN KEY(username) REFERENCES users(username),
   CONSTRAINT fk_autoBid_item FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
