@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS auctions (
   start_date datetime DEFAULT NOW(),
   end_date datetime DEFAULT NULL,
   PRIMARY KEY(auction_id),
-  CONSTRAINT fk_itemid_items FOREIGN KEY(item_id) references items(item_id));
+  CONSTRAINT fk_itemid_items FOREIGN KEY(item_id) references items(item_id),
+  CONSTRAINT fk_seller_items FOREIGN KEY(seller) references users(username));
   
 CREATE TABLE IF NOT EXISTS shirts (
   item_id int DEFAULT 0,
@@ -68,6 +69,7 @@ CREATE TABLE IF NOT EXISTS alerts (
   username varchar(30) NOT NULL DEFAULT '',
   alert_message varchar(100) NOT NULL DEFAULT '', 
   alert_type varchar(10) DEFAULT NULL,
+  alert_time datetime DEFAULT now(),
   PRIMARY KEY(username,alert_message),
   CONSTRAINT fk_alerts_user FOREIGN KEY(username) REFERENCES users(username));
 
