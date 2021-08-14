@@ -9,6 +9,8 @@
 		<div>
 			<a href='CreateAuction/itemType.jsp'>Create new listing</a><br/>
 			<a href='BrowseAuctions/searchItemType.jsp'>Browse active listings</a><br/>
+			<a href='searchAuctionHistory.jsp'>Browse Auction Bid Histories</a><br/>
+			<a href='searchUserHistory.jsp'>Browse User Histories</a><br/>
 			<a href='endCustomerService.jsp'>Customer Service</a><br/>
 			<a href='endProfile.jsp'>Profile</a><br/>
 			<a href='../logout.jsp'>Log out</a>
