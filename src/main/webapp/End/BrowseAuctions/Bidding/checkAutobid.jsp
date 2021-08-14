@@ -65,8 +65,11 @@ if (maxFloat <= currentPrice) {
 	
 	// Find all of the users that have been outbid
 	String outBidUser, itemName;
-	ResultSet outBidSet = st.executeQuery("select distinct username from bidOn where amount < (select max(amount) from bidOn)");
-	ResultSet itemSet = st.executeQuery("select name from auctions a, items i where a.auction_id = " + thisAuction + "and a.item_id = i.item_id");
+	ResultSet outBidSet; 
+	outBidSet = st.executeQuery("select distinct username from bidOn where amount < (select max(amount) from bidOn)");
+	String test = "select name from auctions a, items i where a.auction_id = " + thisAuction + " and a.item_id = i.item_id";
+	System.out.println(test);
+	ResultSet itemSet = st.executeQuery(test);
 	itemSet.next();
 	
 	// Make an alert for all of the users that have been outbid
