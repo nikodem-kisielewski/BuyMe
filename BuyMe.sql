@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS users (
   PRIMARY KEY(username));
 
 INSERT INTO users
-VALUES ("admin","adminpass","Steve","admin");
+VALUES ("admin","adminpass","Steve","admin", now());
 
 INSERT INTO users
-VALUES ("rep1","reppass","Mike","rep");
+VALUES ("rep1","reppass","Mike","rep", now());
 
 CREATE TABLE IF NOT EXISTS items (
   item_id int DEFAULT 0,
