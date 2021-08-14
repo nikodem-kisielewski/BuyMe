@@ -36,7 +36,12 @@
     		
     		// Alert the winner of the auction
     		st.executeUpdate("insert into alerts values (" + winner + ", You have won " + itemName + "for $" + currentPrice + "!, 'won')");
+    				
+    		// Update the item quantity of the item that has been sold
     		st.executeUpdate("update items set quantity = quantity - 1 where item_id = " + soldItem);
+    				
+    		// Make all of the autobids on the auction inacitve
+    		st.executeUpdate("update autoBid set active_status = false where auction_id = " + thisAuction);
     	}
     }
     
