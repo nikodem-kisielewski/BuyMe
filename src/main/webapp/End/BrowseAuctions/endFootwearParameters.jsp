@@ -41,6 +41,7 @@
 				Max price: <input type="number" step="5" name="maxPrice"><br>
 				<input type="submit" name="Submit">
 			</form>
+			<a href='searchItemType.jsp'>Go back to Item Type Selection</a>
 		</div>
 	</body>
 </html>

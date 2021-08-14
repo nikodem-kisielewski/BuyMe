@@ -95,7 +95,6 @@ if (rs.next()) { %>
 		<form action="Bidding/bidOnItem.jsp" method="POST">
 		<table>
 			<tr>
-				<td><b>Auction ID</b></td>
 				<td><b>Name</b></td>
 				<td><b>Condition</b></td>
 				<td><b>Brand</b></td>
@@ -106,7 +105,6 @@ if (rs.next()) { %>
 				<td><b>Current Price</b></td>
 			</tr>
 			<tr>
-				<td><%= rs.getString("auction_id") %></td>
 				<td><%= rs.getString("name") %></td>
 				
 					<!-- Make text user friendly for item condition -->
@@ -130,7 +128,6 @@ if (rs.next()) { %>
 			</tr>
 			<% while (rs.next()) { %>
 				<tr>
-					<td><%= rs.getString("auction_id") %></td>
 					<td><%= rs.getString("name") %></td>
 					
 					<!-- Make text user friendly for item condition -->

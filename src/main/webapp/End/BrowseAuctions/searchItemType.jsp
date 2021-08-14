@@ -8,7 +8,8 @@
 		<div>
 		<a href="endShirtParameters.jsp">Shirt</a>
 		<a href="endPantsParameters.jsp">Pants</a>
-		<a href="endFootwearParameters.jsp">Footwear</a>
+		<a href="endFootwearParameters.jsp">Footwear</a><br>
+		<a href='../endMain.jsp'>Go back to Main BuyMe Page</a>
 		</div>
 	</body>
 </html>

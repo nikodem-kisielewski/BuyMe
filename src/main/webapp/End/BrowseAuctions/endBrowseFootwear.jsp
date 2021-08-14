@@ -126,7 +126,6 @@ if (rs.next()) { %>
 		<form action="Bidding/bidOnItem.jsp" method="POST">
 		<table>
 			<tr>
-				<td><b>Auction ID</b><td>
 				<td><b>Name</b></td>
 				<td><b>Condition</b></td>
 				<td><b>Brand</b></td>
@@ -140,7 +139,6 @@ if (rs.next()) { %>
 				<td><b>Current Price</b></td>
 			</tr>
 			<tr>
-				<td><%= rs.getString("auction_id") %></td>
 				<td><%= rs.getString("name") %></td>
 				
 					<!-- Make text user friendly for item condition -->
@@ -167,17 +165,16 @@ if (rs.next()) { %>
 			</tr>
 			<% while (rs.next()) { %>
 				<tr>
-					<td><%= rs.getString("auction_id") %></td>
 					<td><%= rs.getString("name") %></td>
-				
-						<!-- Make text user friendly for item condition -->
-						<% if (rs.getString("item_condition").equals("brandnew")) {
-							%> <td>Brand New</td> <% 
-						} else if (rs.getString("item_condition").equals("good")) {
-							%> <td>Good</td> <%
-						} else {
-							%> <td>Fair</td> <%
-						} %>
+					
+					<!-- Make text user friendly for item condition -->
+					<% if (rs.getString("item_condition").equals("brandnew")) {
+						%> <td>Brand New</td> <% 
+					} else if (rs.getString("item_condition").equals("good")) {
+						%> <td>Good</td> <%
+					} else {
+						%> <td>Fair</td> <%
+					} %>
 					
 					<td><%= rs.getString("brand") %></td>
 					<td><%= rs.getString("color") %></td>
@@ -186,12 +183,11 @@ if (rs.next()) { %>
 					<td><%= rs.getString("width") %></td>
 					<td><%= rs.getString("securing_method") %></td>
 					<td><%= rs.getString("purpose") %></td>
-					<td><%= rs.getString("gender") %></td>
 					<td>$<%= rs.getString("current_price") %></td>
 					<td><input type="hidden" name="auctionID" value="<%= rs.getString("auction_id") %>">
 						<input type="submit" value="Bid">
 					</td>
-			</tr>
+				</tr>
 			<% } %>
 		</table>
 		</form>
