@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS bidOn (
   auction_id int DEFAULT 0,
   date datetime NOT NULL,
   amount decimal(9, 2) DEFAULT 0,
-  PRIMARY KEY(username, auction_id,date),
+  PRIMARY KEY(auction_id,amount),
   CONSTRAINT fk_bidOn_user FOREIGN KEY(username) REFERENCES users(username),
   CONSTRAINT fk_bidOn_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
 
