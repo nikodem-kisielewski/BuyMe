@@ -39,11 +39,12 @@ if (maxFloat <= currentPrice) {
 
 } else {
 	
-	String addAutobid = "insert into autoBid values(?, ?, true, ?)";
+	String addAutobid = "insert into autoBid values(?, ?, true, ?, ?)";
 	PreparedStatement ps = con.prepareStatement(addAutobid);
 	ps.setString(1, bidder);
 	ps.setInt(2, thisAuction);
 	ps.setFloat(3, maxFloat);
+	ps.setFloat(4, incrementFloat);
 	ps.executeUpdate();
 	
 	String updatePrice = "update auctions set current_price = ? where auction_id = ?";
@@ -57,8 +58,23 @@ if (maxFloat <= currentPrice) {
 	ps.setString(1, bidder);
 	ps.setInt(2, thisAuction);
 	ps.setFloat(3, currentPrice + incrementFloat);
+
+	// Find the current highest bidder among all of the autobids
 	
-	// TODO: Alerts
+	
+	
+	// Find all of the users that have been outbid
+	String outBidUser, itemName;
+	ResultSet outBidSet = st.executeQuery("select distinct username from bidOn where amount < (select max(amount) from bidOn)");
+	ResultSet itemSet = st.executeQuery("select name from auctions a, items i where a.auction_id = " + thisAuction + "and a.item_id = i.item_id");
+	itemSet.next();
+	
+	// Make an alert for all of the users that have been outbid
+	while (outBidSet.next()) {
+		itemName = itemSet.getString("name");
+		outBidUser = outBidSet.getString("username");
+		st.executeUpdate("insert into alerts values(" + outBidUser + ", You have been outbid on " + itemName + "!, 'outbid'");
+	}
 	
 	out.println("Your bid has been successfully placed. <a href='../../endMain.jsp'>Return to the main page.</a>");
 	
