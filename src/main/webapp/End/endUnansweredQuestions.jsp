@@ -39,6 +39,7 @@
 		<%} catch (Exception e) {
 			out.print(e);
 		}%>
+		<a href='endCustomerService.jsp'>Go back to Customer Service Page</a>
 	
 
 	</body>

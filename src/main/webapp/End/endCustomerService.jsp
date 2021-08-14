@@ -6,9 +6,10 @@
 	<body>
 		<h1>Customer Service</h1>
 		<div>
-			<a>Ask a Question</a><br/>
 			<a href="endUnansweredQuestions.jsp">My Unanswered Questions</a><br/>
-			<a href="endAnsweredQuestions.jsp">My Answered Questions</a>
+			<a href="endAnsweredQuestions.jsp">My Answered Questions</a><br>
+			<a href="browseQuestions.jsp">Browse Questions</a><br>
+			<a href="searchQuestions.jsp">Search Questions</a>
 		</div>
 		<br/>
 		<div>
@@ -17,6 +18,7 @@
 			
 			<input type="submit" value="Submit"/>
 			</form>
+			<a href='endMain.jsp'>Go back to BuyMe Main Page</a>
 		</div>
 	</body>
 </html>

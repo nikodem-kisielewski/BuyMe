@@ -30,7 +30,8 @@ if (question.equals("")) {
 	//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
 	con.close();
 	out.print("Question asked!");
-
-	
+	%>
+	<a href='endCustomerService.jsp'>Go back to Customer Service Page</a>
+	<% 
 }
 %>

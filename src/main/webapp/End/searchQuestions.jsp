@@ -37,7 +37,7 @@
 		<table>
 		
 			<tr>
-				<td>Question</td>
+				<td>Question           </td>
 				<td>Answer</td>
 			</tr>
 		
@@ -69,6 +69,6 @@
 			out.print(e);
 		}%>
 	
-
+		<a href='endCustomerService.jsp'>Go back to Customer Service Page</a>
 	</body>
 </html>
