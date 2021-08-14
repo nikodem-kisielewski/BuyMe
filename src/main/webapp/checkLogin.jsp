@@ -25,10 +25,20 @@
     	currentPrice = rs.getFloat("current_price");
     	reserve = rs.getFloat("reserve_price");
     	
-    	
+    	// If the item did not reach it's minumum price
     	if (currentPrice < reserve) {
-    		st.executeUpdate("update auctions set current_price = 0 where auction_id = " + thisAuction);	
+    		
+    		// Set the current price of the auction to 0
+    		st.executeUpdate("update auctions set current_price = 0 where auction_id = " + thisAuction);
+    		
+    		// Alert the seller that his item did not sell
+    		st.executeUpdate("insert into alerts ('" + seller + "', 'Your item, " + itemName + " did not reach your minimum price.', 'notsold', now()");
+    		
+    		// Alert the buyer that he did not win the item
+    		st.executeUpdate("insert into alerts ('" + winner + "', 'You did not win " + itemName + " since your bid did not surpass the minimum price of the auction.', 'notwon', now()");
+    		
     	} else {
+    		
     		// Insert the winner into the sold table
     		st.executeUpdate("insert into sold values(" + seller + ", " + winner + ", " + thisAuction + ", " + currentPrice + ")");
     		
