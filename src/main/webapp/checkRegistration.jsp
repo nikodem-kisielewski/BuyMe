@@ -22,13 +22,15 @@
     
     // Insert the new user into the database
     else {
-    	String query = "insert into users (username, password, acct_type) values (?, ?, ?)";
+    	String query = "insert into users values(?, ?, ?, ?, now())";
     	PreparedStatement ps = con.prepareStatement(query);
     	
 		ps.setString(1, userid);
 		ps.setString(2, pwd);
 		// User account type is end user by default
-		ps.setString(3, "end");
+		ps.setString(3, null);
+		ps.setString(4, "end");
+		
 		ps.executeUpdate();
 		con.close();
 		
