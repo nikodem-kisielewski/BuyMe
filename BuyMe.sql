@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS alerts (
   alert_message varchar(100) NOT NULL DEFAULT '', 
   alert_type varchar(10) DEFAULT NULL,
   alert_time datetime DEFAULT now(),
-  PRIMARY KEY(username,alert_message,alert_time),
+  PRIMARY KEY(username,alert_time),
   CONSTRAINT fk_alerts_user FOREIGN KEY(username) REFERENCES users(username));
 
 CREATE TABLE IF NOT EXISTS autoBid (
