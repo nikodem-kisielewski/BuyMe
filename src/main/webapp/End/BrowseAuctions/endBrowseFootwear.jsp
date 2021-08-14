@@ -110,11 +110,23 @@ if (maxPrice.equals("")) {
 }
 
 // Create the query and insert the proper values afterwards
-String similarQuery = "select * from auctions a natural join (select * from items i natural join footwear f" + 
-	" where i.item_id = f.item_id) f where a.item_id = f.item_id and now() < end_date and item_condition = " + itemCondition +
-	" and brand = " + brand + " and color = " + color + " and material = " + material + " and shoe_size = " + shoeSize +
-	" and current_price <= " + maxPrice + " and gender = " + "'" + gender + "' and shoe_size = " + shoeSize +
-	" and width = " + shoeWidth + " and in_sole = " + insole + " and securing_method = " + method + " and purpose = " + purpose;
+String similarQuery;
+if (request.getParameter("sort").equals("priceHighToLow")) {
+	similarQuery = "select * from auctions a natural join (select * from items i natural join footwear f" + 
+		" where i.item_id = f.item_id) f where a.item_id = f.item_id and now() < end_date and item_condition = " + itemCondition +
+		" and brand = " + brand + " and color = " + color + " and material = " + material + " and shoe_size = " + shoeSize +
+		" and current_price <= " + maxPrice + " and gender = " + "'" + gender + "' and shoe_size = " + shoeSize +
+		" and width = " + shoeWidth + " and in_sole = " + insole + " and securing_method = " + method + " and purpose = "
+		+ purpose + " order by current_price desc";
+} else {
+	similarQuery = "select * from auctions a natural join (select * from items i natural join footwear f" + 
+		" where i.item_id = f.item_id) f where a.item_id = f.item_id and now() < end_date and item_condition = " + itemCondition +
+		" and brand = " + brand + " and color = " + color + " and material = " + material + " and shoe_size = " + shoeSize +
+		" and current_price <= " + maxPrice + " and gender = " + "'" + gender + "' and shoe_size = " + shoeSize +
+		" and width = " + shoeWidth + " and in_sole = " + insole + " and securing_method = " + method + " and purpose = "
+		+ purpose + " order by current_price asc";
+}
+
 
 // Execute the prepared query
 rs = st.executeQuery(similarQuery);

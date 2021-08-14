@@ -94,11 +94,20 @@ if (maxPrice.equals("")) {
 }
 
 // Create the query and insert the proper values afterwards
-String similarQuery = "select * from auctions a natural join (select * from items i natural join pants p" + 
-	" where i.item_id = p.item_id) p where a.item_id = p.item_id and now() < end_date and item_condition = " + itemCondition +
-	" and brand = " + brand + " and color = " + color + " and material = " + material + " and pants_size = " + pantsSize +
-	" and current_price <= " + maxPrice + " and gender = " + "'" + gender + "' and pants_type = " + type +
-	" and style = " + style;
+String similarQuery;
+if (request.getParameter("sort").equals("priceHighToLow")) {
+	similarQuery= "select * from auctions a natural join (select * from items i natural join pants p" + 
+		" where i.item_id = p.item_id) p where a.item_id = p.item_id and now() < end_date and item_condition = " + itemCondition +
+		" and brand = " + brand + " and color = " + color + " and material = " + material + " and pants_size = " + pantsSize +
+		" and current_price <= " + maxPrice + " and gender = " + "'" + gender + "' and pants_type = " + type +
+		" and style = " + style + " order by current_price desc";	
+} else {
+	similarQuery= "select * from auctions a natural join (select * from items i natural join pants p" + 
+		" where i.item_id = p.item_id) p where a.item_id = p.item_id and now() < end_date and item_condition = " + itemCondition +
+		" and brand = " + brand + " and color = " + color + " and material = " + material + " and pants_size = " + pantsSize +
+		" and current_price <= " + maxPrice + " and gender = " + "'" + gender + "' and pants_type = " + type +
+		" and style = " + style + " order by current_price asc";
+}
 
 // Execute the prepared query
 rs = st.executeQuery(similarQuery);

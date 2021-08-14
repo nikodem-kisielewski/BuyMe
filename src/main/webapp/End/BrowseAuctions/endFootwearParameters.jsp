@@ -39,6 +39,10 @@
 					<option value="Female">Female</option>
 				</select><br>
 				Max price: <input type="number" step="5" name="maxPrice"><br>
+				Sort by: <select name="sort" id="sort">
+					<option value="priceHighToLow">Price: High to Low</option>
+					<option value="priceLowToHigh">Price: Low to High</option>
+				</select><br>
 				<input type="submit" name="Submit">
 			</form>
 		</div>
