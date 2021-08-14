@@ -5,6 +5,8 @@
 Class.forName("com.mysql.jdbc.Driver");
 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "rootpass");
 Statement st = con.createStatement();
+Statement newst = con.createStatement();
+Statement newerst = con.createStatement();
 ResultSet rs;
 
 //Get the username of the seller
@@ -71,6 +73,13 @@ if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals
 	if (rs.next()) {
 		int similarItemID = rs.getInt("item_id");
 		st.executeUpdate("update items set quantity = quantity + 1 where item_id = " + similarItemID);
+		
+		// Check to see if anyone was looking for the item and alert them
+		ResultSet simAlert = newst.executeQuery("select username, name from desiredItems natural join items where item_id = " + similarItemID);
+		while (simAlert.next()) {
+			newerst.executeUpdate("insert into alerts values('" + simAlert.getString("username") + "', 'Your desired item, " + simAlert.getString("name") + " is now available for bidding!', 'item', now())");
+			newerst.executeUpdate("delete from desiredItems where item_id = " + similarItemID + ", '" + simAlert.getString("username") + "'");
+		}
 		
 		// Find the highest ID number from the auctions table and create a new ID that is larger than it
 		ResultSet lastID = st.executeQuery("select max(auction_id) highest from auctions");
