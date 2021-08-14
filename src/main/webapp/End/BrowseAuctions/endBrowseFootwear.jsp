@@ -207,6 +207,7 @@ if (rs.next()) { %>
 			<% } %>
 		</table>
 		</form>
+		<a href="endFootwearParameters.jsp">Return to the search parameters page</a>
 	</html>
 	
 <% } else {

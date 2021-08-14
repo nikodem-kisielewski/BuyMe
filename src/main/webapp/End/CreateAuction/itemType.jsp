@@ -8,7 +8,8 @@
 		<div>
 		<a href="Shirt/shirtListing.jsp">Shirt</a>
 		<a href="Pants/pantsListing.jsp">Pants</a>
-		<a href="Footwear/footwearListing.jsp">Footwear</a>
+		<a href="Footwear/footwearListing.jsp">Footwear</a><br>
+		<a href="../endMain.jsp">Return to the main page</a>
 		</div>
 	</body>
 </html>

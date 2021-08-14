@@ -185,6 +185,7 @@ if (rs.next()) { %>
 			<% } %>
 		</table>
 		</form>
+		<a href="endPantsParameters.jsp">Return to the search parameters page</a>
 	</html>
 	
 <% } else {

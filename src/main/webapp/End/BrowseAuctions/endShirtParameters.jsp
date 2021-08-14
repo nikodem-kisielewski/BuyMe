@@ -41,6 +41,7 @@
 				</select><br>
 				<input type="submit" name="Submit">
 			</form>
+			<a href="searchItemType.jsp">Return to the item selection page</a>
 		</div>
 	</body>
 </html>

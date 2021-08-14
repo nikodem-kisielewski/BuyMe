@@ -181,6 +181,7 @@
 			<input type="hidden" name="auctionID" value="<%= thisAuctionID %>">
 			<input type="submit" value="Create Autobid">
 		</form>
+		<a href="../../endMain.jsp">Return to the main page</a>
 	</div>
 </html>
 
