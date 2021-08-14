@@ -122,5 +122,3 @@ CREATE TABLE IF NOT EXISTS desiredItems (
   PRIMARY KEY(item_id,username),
   CONSTRAINT fk_desiredItems_item FOREIGN KEY(item_id) REFERENCES items(item_id),
   CONSTRAINT fk_desiredItems_user FOREIGN KEY(username) REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE);
-      
-    
