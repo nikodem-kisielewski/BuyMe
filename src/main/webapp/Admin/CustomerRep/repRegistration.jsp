@@ -23,7 +23,7 @@
     
     // Insert the new user into the database
     else {
-    	String query = "insert into users values (?, ?, ?, ?)";
+    	String query = "insert into users values (?, ?, ?, ?, now())";
     	PreparedStatement ps = con.prepareStatement(query);
     	
 		ps.setString(1, userid);

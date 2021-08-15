@@ -5,7 +5,7 @@
    </head>
    <body>
    <h1>Edit End User Account</h1>
-     <form action="performChange.jsp" method="POST">
+     <form action="editUserCode.jsp" method="POST">
        Old Username:	<input type="text" name="old_user"/> <br/>
        New Username: <input type="text" name="new_user"/> <br/>
        New Password: <input type="text" name="pass"/> <br/>

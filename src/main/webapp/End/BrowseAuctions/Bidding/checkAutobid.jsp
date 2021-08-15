@@ -64,10 +64,9 @@ if (maxFloat <= currentPrice) {
 		ps.setString(1, bidder);
 		ps.setInt(2, thisAuction);
 		ps.setFloat(3, currentPrice + incrementFloat);
+		ps.executeUpdate();
 	
 		currentPrice += incrementFloat;
-
-		out.println("Your bid has been successfully placed. <a href='../../endMain.jsp'>Return to the main page.</a>");
 		
 	} else {
 		// Get the second highest autobidder
@@ -98,7 +97,7 @@ if (maxFloat <= currentPrice) {
 	
 	
 	Statement newst = con.createStatement();
-	ResultSet newRS = st.executeQuery("select username, highest_price from autoBid where auction_id = " + thisAuction + " and highest_price < (select max(highest_price) from autoBid)");
+	ResultSet newRS = st.executeQuery("select username, highest_price, bid_interval from autoBid where auction_id = " + thisAuction + " and active_status = 1 and highest_price < (select max(highest_price) from autoBid)");
 	String help;
 	float yes;
 	while (newRS.next()) {

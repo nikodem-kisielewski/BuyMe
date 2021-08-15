@@ -7,23 +7,20 @@
     ResultSet rs;
     rs = st.executeQuery("select * from auctions where auction_id='" + auction_id + "'");
     
-    // Check if the username already exists
+    // Check if the auction exists
     if (!rs.next()) {
     	out.println("Auction does not exist <div><a href='removeAuction.jsp'>Try again</a></div>");
     }
-    
-    // Check to see if the entered username and password are valid
-    // Usernames and passwords cannot be blank and cannot contain spaces
    
-    // Insert the new user into the database
+    // Delete the auction
     else {
-    	String query = "DELETE FROM users WHERE username='"+auction_id+"'";
+    	String query = "DELETE FROM auctions WHERE  auction_id='"+auction_id+"'";
     	PreparedStatement ps = con.prepareStatement(query);
 		ps.executeUpdate();
 		con.close();
 		out.print("Deletion of Auction " +"'"+auction_id + "'" +" was successful");
 		%>
 		</br>
-		<a href='removeAuction.jsp'>Go back to Auction Removal Page</a><%
+		<a href='deleteAuction.jsp'>Go back to Auction Removal Page</a><%
     }
 %>

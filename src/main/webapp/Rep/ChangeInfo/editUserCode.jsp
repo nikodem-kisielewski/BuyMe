@@ -20,7 +20,7 @@
    
     // Insert the new user into the database
     else {
-    	String query = "UPDATE users SET username='" + new_username+ "' and password='" +new_password+"'name='"+new_name+"' WHERE username='"+old_username+"'";
+    	String query = "UPDATE users SET username='" + new_username+ "', password='" +new_password+"', name='"+new_name+"' WHERE username='"+old_username+"'";
     	PreparedStatement ps = con.prepareStatement(query);
 		ps.executeUpdate();
 		con.close();

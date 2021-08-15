@@ -36,7 +36,7 @@
               <% 
         }
         else if(data_type.equals("best_items")){
-        	 rs=st.executeQuery("select a.item_id, sum(a.current_price) as total from auctions a where now()>a.end_date order by item_id,total desc;");
+        	 rs=st.executeQuery("select a.item_id, sum(a.current_price) as total from auctions a where now()>a.end_date group by item_id order by total desc");
         	 %>
         	 <table border=1 style="text-align:center">
              <thead>
@@ -60,7 +60,7 @@
               <% 
         }
         else if(data_type.equals("best_sellers")){
-        	 rs=st.executeQuery("select a.seller, sum(a.current_price) as total from auctions a where now()>a.end_date order by seller,total desc;");
+        	 rs=st.executeQuery("select a.seller, sum(a.current_price) as total from auctions a where now()>a.end_date group by seller order by total desc;");
         	 %>
         	 <table border=1 style="text-align:center">
              <thead>

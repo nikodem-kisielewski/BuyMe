@@ -1,4 +1,5 @@
 <%@ page import ="java.sql.*" %>
+
 <%
 	// Get the users information
     String userid = request.getParameter("username");   
@@ -7,29 +8,32 @@
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "rootpass");
     Statement st = con.createStatement();
-    Statement newst = con.createStatement();
-    ResultSet rs;
+    Statement st2 = con.createStatement();
+    Statement st3 = con.createStatement();
+    ResultSet rs, rs2;
     
     rs = st.executeQuery("select last_login from users where username = '" + (String)session.getAttribute("user") + "'");
     
     // Auctions that did not have any bids
-    String noBids = "select * from auctions natural join items where now() > end_date and current_price = 0 and (select last_login from users where username = '"
-    	+ (String)session.getAttribute("user") + "') < end_date";
+    String noBids = "select * from auctions natural join items where now() > end_date and current_price = 0";
     rs = st.executeQuery(noBids);
+    
     String seller, itemName;
     int thisAuction;
     
     while(rs.next()) {
     	seller = rs.getString("seller");
     	itemName = rs.getString("name");
-    	
-    	newst.executeUpdate("insert into alerts values('" + seller + "', 'Your item, " + itemName + " did not reach your minimum price.', 'notsold', now())");
+    	rs2 = st2.executeQuery("select username, alert_message, alert_type from alerts where username = '" + seller + "' or alert_message = 'Your item, "
+    		+ itemName + " did not reach your minimum price.' or alert_type = 'notsold'");
+    	if (!rs2.next()) {
+    		st3.executeUpdate("insert into alerts values('" + seller + "', 'Your item, " + itemName + " did not reach your minimum price.', 'notsold', now())");
+    	}
     }
     
-    
     // Update all other auction information
-    String doneAuctionQuery = "select * from auctions a natural join bidOn b natural join items where now() > a.end_date and a.auction_id = b.auction_id and current_price = amount and (select last_login from users where username = '"
-        	+ (String)session.getAttribute("user") + "') < end_date";
+    String doneAuctionQuery = "select * from auctions a natural join bidOn b natural join items natural join users where now() > a.end_date and a.auction_id = b.auction_id" +
+    	" and current_price = amount";
     rs = st.executeQuery(doneAuctionQuery);
     String winner;
     int soldItem;
@@ -48,27 +52,41 @@
     	if (currentPrice < reserve) {
     		
     		// Set the current price of the auction to 0
-    		newst.executeUpdate("update auctions set current_price = 0 where auction_id = " + thisAuction);
+    		st2.executeUpdate("update auctions set current_price = 0 where auction_id = " + thisAuction);
     		
     		// Alert the seller that his item did not sell
-    		newst.executeUpdate("insert into alerts ('" + seller + "', 'Your item, " + itemName + " did not reach your minimum price.', 'notsold', now())");
+    		rs2 = st2.executeQuery("select username, alert_message, alert_type from alerts where username = '" + seller + "' or alert_message = 'Your item, "
+    			+ itemName + " did not reach your minimum price.' or alert_type = 'notsold'");
+    		if (!rs2.next()) {
+    			st3.executeUpdate("insert into alerts values('" + seller + "', 'Your item, " + itemName + " did not reach your minimum price.', 'notsold', now())");
+    		}
+    		
     		
     		// Alert the buyer that he did not win the item
-    		newst.executeUpdate("insert into alerts ('" + winner + "', 'You did not win " + itemName + " since your bid did not surpass the minimum price of the auction.', 'notwon', now())");
+    		rs2 = st2.executeQuery("select username, alert_message, alert_type from alerts where username = '" + seller + "' or alert_message = 'You did not win "
+    			+ itemName + " since your bid did not surpass the minimum price of the auction.' or alert_type = 'notwon'");
+    		if (!rs2.next()) {
+    			st3.executeUpdate("insert into alerts values('" + winner + "', 'You did not win " + itemName + " since your bid did not surpass the minimum price of the auction.', 'notwon', now())");
+    		}
+    		
     		
     	} else {
     		
     		// Insert the winner into the sold table
-    		newst.executeUpdate("insert into sold values(" + seller + ", " + winner + ", " + thisAuction + ", " + currentPrice + ")");
+    		st2.executeUpdate("insert into sold values('" + seller + "', '" + winner + "', " + thisAuction + ", " + currentPrice + ")");
     		
     		// Alert the winner of the auction
-    		newst.executeUpdate("insert into alerts values (" + winner + ", You have won " + itemName + "for $" + currentPrice + "!, 'won', now())");
+    		rs2 = st2.executeQuery("select username, alert_message, alert_type from alerts where username = '" + winner + "' or alert_message = 'You have won "
+    			+ itemName + " for $" + currentPrice + "!' or alert_type = 'won'");
+    		if (!rs2.next()) {
+        		st3.executeUpdate("insert into alerts values ('" + winner + "', 'You have won " + itemName + " for $" + currentPrice + "!', 'won', now())");
+        	}
     				
     		// Update the item quantity of the item that has been sold
-    		newst.executeUpdate("update items set quantity = quantity - 1 where item_id = " + soldItem);
+    		st2.executeUpdate("update items set quantity = quantity - 1 where item_id = " + soldItem);
     				
     		// Make all of the autobids on the auction inacitve
-    		newst.executeUpdate("update autoBid set active_status = false where auction_id = " + thisAuction);
+    		st2.executeUpdate("update autoBid set active_status = false where auction_id = " + thisAuction);
     	}
     }
     
@@ -79,9 +97,6 @@
         session.setAttribute("user", userid); // the username will be stored in the session
         out.println("welcome " + userid);
         out.println("<a href='logout.jsp'>Log out</a>");
-        
-        // Update when the customer last logged in
-        newst.executeUpdate("update users set last_login = now() where username = '" + (String)session.getAttribute("user") + "'");
         
         // Check the users account type and redirect them to the proper page
         String type = rs.getString("acct_type");

@@ -105,7 +105,7 @@ if (rs.getInt("autoBidders") == 1) {
 }
 
 Statement newst = con.createStatement();
-ResultSet newRS = st.executeQuery("select username, highest_price from autoBid where auction_id = " + thisAuction + " and highest_price < (select max(highest_price) from autoBid)");
+ResultSet newRS = st.executeQuery("select username, highest_price from autoBid where auction_id = " + thisAuction + " and active_status = 1 and highest_price < (select max(highest_price) from autoBid)");
 String help;
 float yes;
 while (newRS.next()) {

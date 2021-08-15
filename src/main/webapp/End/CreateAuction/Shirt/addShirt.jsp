@@ -75,7 +75,7 @@ if (manLoc.equals("") || brand.equals("") || color.equals("") || material.equals
 		ResultSet simAlert = newst.executeQuery("select username, name from desiredItems natural join items where item_id = " + similarItemID);
 		while (simAlert.next()) {
 			newerst.executeUpdate("insert into alerts values('" + simAlert.getString("username") + "', 'Your desired item, " + simAlert.getString("name") + " is now available for bidding!', 'item', now())");
-			newerst.executeUpdate("delete from desiredItems where item_id = " + similarItemID + ", '" + simAlert.getString("username") + "'");
+			newerst.executeUpdate("delete from desiredItems where item_id = " + similarItemID + " and username = '" + simAlert.getString("username") + "'");
 		}
 		
 		// Find the highest ID number from the auctions table and create a new ID that is larger than it

@@ -9,7 +9,7 @@ Statement st = con.createStatement();
 ResultSet rs;
 
 String user = (String)session.getAttribute("user");
-rs = st.executeQuery("select alert_message from alerts where username = '" + user + "'");
+rs = st.executeQuery("select distinct a.alert_message from alerts a, users u where u.last_login > a.alert_time and a.username = u.username and a.username = '" + user + "'");
 
 %>
 

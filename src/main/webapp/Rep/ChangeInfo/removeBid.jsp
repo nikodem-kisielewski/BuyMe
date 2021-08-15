@@ -5,7 +5,7 @@
    </head>
    <body>
    <h1>Remove Bid</h1>
-     <form action="performChange.jsp" method="POST">
+     <form action="deleteBidCode.jsp" method="POST">
        Auction ID:	<input type="text" name="key"/> <br/>
        Username: <input type="text" name="username"/> <br/>
        Bid Amount: <input type="text" name="bid_amount"/> <br/>
