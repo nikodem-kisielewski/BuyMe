@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS autoBid (
   bid_interval decimal(9,2) DEFAULT NULL,
   PRIMARY KEY(username,auction_id),
   CONSTRAINT fk_autoBid_user FOREIGN KEY(username) REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT fk_autoBid_item FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
+  CONSTRAINT fk_autoBid_item FOREIGN KEY(auction_id) REFERENCES auctions(auction_id) ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS bidOn (
   username varchar(30) NOT NULL,
@@ -93,8 +93,8 @@ CREATE TABLE IF NOT EXISTS bidOn (
   date datetime NOT NULL,
   amount decimal(9, 2) DEFAULT 0,
   PRIMARY KEY(username,auction_id,amount),
-  CONSTRAINT fk_bidOn_user FOREIGN KEY(username) REFERENCES users(username),
-  CONSTRAINT fk_bidOn_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id));
+  CONSTRAINT fk_bidOn_user FOREIGN KEY(username) REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE ,
+  CONSTRAINT fk_bidOn_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id) ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS ask (
   customer_username varchar(30) NOT NULL DEFAULT '',
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS sold (
   auction_id int DEFAULT 0,
   final_price decimal(9,2) DEFAULT NULL,
   PRIMARY KEY(seller,auction_id),
-  CONSTRAINT fk_sold_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id),
+  CONSTRAINT fk_sold_auction FOREIGN KEY(auction_id) REFERENCES auctions(auction_id) ON DELETE CASCADE,
   CONSTRAINT fk_sold_seller FOREIGN KEY(seller) REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT fk_sold_buyer FOREIGN KEY(buyer) REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE);
   
