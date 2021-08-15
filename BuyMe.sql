@@ -74,7 +74,6 @@ CREATE TABLE IF NOT EXISTS alerts (
   alert_message varchar(100) NOT NULL DEFAULT '', 
   alert_type varchar(10) NOT NULL DEFAULT '',
   alert_time datetime DEFAULT now(),
-  seen bool DEFAULT FALSE,
   PRIMARY KEY(username, alert_message, alert_type,alert_time),
   CONSTRAINT fk_alerts_user FOREIGN KEY(username) REFERENCES users(username) ON UPDATE CASCADE ON DELETE CASCADE);
 
