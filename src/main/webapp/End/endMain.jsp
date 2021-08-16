@@ -19,17 +19,30 @@ rs = st.executeQuery("select a.alert_message from alerts a where a.username = '"
 		<title>BuyMe Main Page</title>
 	</head>
 	<body>
-		<div>
-		<ul>
-			<li><a href='CreateAuction/itemType.jsp' class='dropdown'>Create new listing</a></li>
-			<li><a href='BrowseAuctions/searchItemType.jsp'>Browse active listings</a></li>
-			<li><a href='BrowseItems/searchItemType.jsp'>Browse Items</a></li>
-			<li><a href='BidHistory/searchAuctionHistory.jsp'>Browse Auction Bid Histories</a></li>
-			<li><a href='UserHistory/searchUserHistory.jsp'>Browse User Histories</a></li>
-			<li><a href='CustService/endCustomerService.jsp'>Customer Service</a></li>
-			<li><a href='Profile/endProfile.jsp'>Profile</a></li>
-			<li style='float:right'><a href='../logout.jsp'>Log out</a></li>
-		</ul>
+		<div class = 'navbar'>
+			<div class = 'dropdown'>
+				<button class='dropbtn'>Create a new listing</button>
+				<div class='dropdown-content'>
+					<a href='CreateAuction/Footwear/footwearListing.jsp'>Footwear</a>
+					<a href='CreateAuction/Pants/pantsListing.jsp'>Pants</a>
+					<a href='CreateAuction/Shirts/shirtsListing.jsp'>Shirts</a>
+				</div>
+			</div>
+			<div>
+				<button class='dropbtn'>Browse active listings</button>
+				<div class='dropdown-content'>
+					<a href='BrowseAuctions/endFootwearParameters.jsp'>Footwear</a>
+					<a href='BrowseAuctions/Pants/endPantsParameters.jsp'>Pants</a>
+					<a href='BrowseAuction/Shirts/shirtsListing.jsp'>Shirts</a>
+				</div>
+			</div>
+			<a href='BrowseAuctions/searchItemType.jsp'>Browse active listings</a>
+			<a href='BrowseItems/searchItemType.jsp'>Browse Items</a>
+			<a href='BidHistory/searchAuctionHistory.jsp'>Browse Auction Bid Histories</a>
+			<a href='UserHistory/searchUserHistory.jsp'>Browse User Histories</a>
+			<a href='CustService/endCustomerService.jsp'>Customer Service</a>
+			<a href='Profile/endProfile.jsp'>Profile</a>
+			<a href='../logout.jsp' style='float:right'>Log out</a>
 		</div>
 		<h1>BuyMe Main Page</h1>
 		<h2>Welcome, <% out.print(session.getAttribute("user").toString());%></h2>
