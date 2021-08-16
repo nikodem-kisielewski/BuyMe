@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <a href="src/main/webapp/login.jsp"> Access Website</a>
+  </body>
+<html>
+
 # BuyMe
 
 ### **Introduction** 
