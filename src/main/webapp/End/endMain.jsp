@@ -15,38 +15,25 @@ rs = st.executeQuery("select a.alert_message from alerts a where a.username = '"
 <!DOCTYPE html>
 <html>
 	<head>
+	<link rel="stylesheet" href="../stylesheet.css">
 		<title>BuyMe Main Page</title>
-		<style>
-			table {
-				border: 1px solid black;
-				border-collapse: collapse;	
-				width: 50%
-			}
-			table.center {
-  				margin-left: auto; 
-  				margin-right: auto;
-			}
-			th, td {
-				text-align: left;
-				padding: 15px;
-			}	
-			tr:nth-child(even) {
-				background-color: #f2f2f2;
-			}
-		</style>
 	</head>
 	<body>
+		<div>
+		<ul>
+			<li><a href='CreateAuction/itemType.jsp' class='dropdown'>Create new listing</a></li>
+			<li><a href='BrowseAuctions/searchItemType.jsp'>Browse active listings</a></li>
+			<li><a href='BrowseItems/searchItemType.jsp'>Browse Items</a></li>
+			<li><a href='BidHistory/searchAuctionHistory.jsp'>Browse Auction Bid Histories</a></li>
+			<li><a href='UserHistory/searchUserHistory.jsp'>Browse User Histories</a></li>
+			<li><a href='CustService/endCustomerService.jsp'>Customer Service</a></li>
+			<li><a href='Profile/endProfile.jsp'>Profile</a></li>
+			<li style='float:right'><a href='../logout.jsp'>Log out</a></li>
+		</ul>
+		</div>
 		<h1>BuyMe Main Page</h1>
 		<h2>Welcome, <% out.print(session.getAttribute("user").toString());%></h2>
 		<div>
-			<a href='CreateAuction/itemType.jsp'>Create new listing</a><br/>
-			<a href='BrowseAuctions/searchItemType.jsp'>Browse active listings</a><br/>
-			<a href='BrowseItems/searchItemType.jsp'>Browse Items</a><br/>
-			<a href='BidHistory/searchAuctionHistory.jsp'>Browse Auction Bid Histories</a><br/>
-			<a href='UserHistory/searchUserHistory.jsp'>Browse User Histories</a><br/>
-			<a href='CustService/endCustomerService.jsp'>Customer Service</a><br/>
-			<a href='Profile/endProfile.jsp'>Profile</a><br/>
-			
 		<table class="center">
 			<tr>
 				<td><b>Alerts</b></td>
@@ -57,7 +44,6 @@ rs = st.executeQuery("select a.alert_message from alerts a where a.username = '"
 			</tr>
 			<% } %>
 		</table>
-		<a href='../logout.jsp'>Log out</a>
 		</div>
 	</body>
 </html>

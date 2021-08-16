@@ -40,7 +40,7 @@ rs=st.executeQuery("select username from users where username='"+seller+"';");
     		  %><a href='generateSalesReport.jsp'>User does not exist in database</a><% 
     	}
     	else{
-    		rs=st.executeQuery("select max(current_price) as total from auctions where seller='"+seller+"' and now()>end_date;");
+    		rs=st.executeQuery("select max(final_price) as total from sold where seller='"+seller+"' and buyer <> ''");
     		rs.first();
         		   %>
 	    	 <table>

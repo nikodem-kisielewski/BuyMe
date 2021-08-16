@@ -25,12 +25,12 @@ float currentPrice = Float.parseFloat(rs.getString("current_price"));
 boolean goodTime = rs.getBoolean("goodTime");
 
 // Check if the user is bidding on their own auction
-if (bidder.equals((String)session.getAttribute("user"))) {
+if (seller.equals((String)session.getAttribute("user"))) {
 	out.println("Error: You cannot bid on your own auction. <div><a href='../searchItemType.jsp'>Return to the search page.</a>");
 	
 // Check if the auction has expired while the user was browsing
 } else if (!goodTime) {
-	out.println("Error: this auction has ended. <div><a href'../../endMain.jsp'>Return to the main page.</a>");
+	out.println("Error: this auction has ended. <div><a href='../../endMain.jsp'>Return to the main page.</a></div>");
 	
 // If the autobid max price is not larger than the current price of the auction, reject the bid
 } else if (maxPrice <= currentPrice) {
@@ -87,8 +87,9 @@ if (bidder.equals((String)session.getAttribute("user"))) {
 		
 	} else {
 		// Get the second highest autobidder
-		String secondHighest = "select username, highest_price from autoBid where auction_id = " + thisAuction + " and highest_price = (select max(highest_price) from autoBid " +
-			"where highest_price < (select max(highest_price) from autoBid))";
+		String secondHighest = "select username, highest_price from autoBid where auction_id = "
+			+ thisAuction + " and highest_price = (select max(highest_price) from autoBid where auction_id = "
+			+ thisAuction + " and highest_price < (select max(highest_price) from autoBid where auction_id = " + thisAuction + "))";
 		rs = st.executeQuery(secondHighest);
 		rs.next();
 		String secondHighestUsername = rs.getString("username");
@@ -96,9 +97,6 @@ if (bidder.equals((String)session.getAttribute("user"))) {
 		
 		// Insert the second highest autobidder's bid
 		st.executeUpdate("insert into bidOn values('" + secondHighestUsername + "', " + thisAuction + ", now(), " + secondHighestMaxPrice + ")");
-		
-		// Change the active status of the second highest autobidder
-		st.executeUpdate("update autoBid set active_status = false where username = '" + secondHighestUsername + "' and auction_id = " + thisAuction);
 		
 		
 		// Get the highest autobidder
@@ -123,13 +121,14 @@ if (bidder.equals((String)session.getAttribute("user"))) {
 		st.executeUpdate("insert into alerts values('" + secondHighestUsername + "', 'Someone has bid higher than your maximum on " + itemName + "!', 'outbid', now())");
 		
 		// Change the active status of the second highest autobidder
-		st.executeUpdate("update autoBid set active_status = false where auction_id = " + thisAuction + " and username = " + secondHighestUsername);
+		st.executeUpdate("update autoBid set active_status = false where auction_id = " + thisAuction + " and username = '" + secondHighestUsername + "'");
 		
 	}
 	
 	
 	Statement newst = con.createStatement();
-	ResultSet newRS = st.executeQuery("select username, highest_price, bid_interval from autoBid where auction_id = " + thisAuction + " and active_status = 1 and highest_price < (select max(highest_price) from autoBid)");
+	ResultSet newRS = st.executeQuery("select username, highest_price, bid_interval from autoBid where auction_id = "
+		+ thisAuction + " and active_status = 1 and highest_price < (select max(highest_price) from autoBid)");
 	String help;
 	float yes;
 	while (newRS.next()) {
@@ -140,9 +139,9 @@ if (bidder.equals((String)session.getAttribute("user"))) {
 	
 	//Find all of the users that have been outbid
 	String outBidUser, outBidQuery;
-	outBidQuery = "select distinct b.username from bidOn b where b.auction_id = "
-		+ thisAuction + " and b.username not in (select username from bidOn where amount = (select max(amount) from bidOn)) "
-		+ "and b.username not in (select username from autoBid where auction_id = " + thisAuction + ")";
+	outBidQuery = "select distinct b.username, i.name from bidOn b, auctions a, items i where a.item_id = i.item_id and a.auction_id = b.auction_id and b.auction_id = "
+			+ thisAuction + " and b.username not in (select username from bidOn where amount = (select max(amount) from bidOn where auction_id = "
+			+ thisAuction + ")) and b.username not in (select username from autoBid where auction_id = " + thisAuction + ")";
 	rs = st.executeQuery(outBidQuery);
 
 	// Make an alert for all of the users that have been outbid

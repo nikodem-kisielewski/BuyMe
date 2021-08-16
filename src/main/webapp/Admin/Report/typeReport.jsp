@@ -40,7 +40,7 @@ if(type==null){
 }
 
 else if(type.equals("shirt")){
-	 rs=st.executeQuery("select sum(a.current_price) as total from auctions a,shirts s where now()>a.end_date and a.item_id=s.item_id;");
+	 rs=st.executeQuery("select sum(ss.final_price) as total from sold ss, shirts s, auctions a where buyer <> '' and ss.auction_id = a.auction_id and a.item_id = s.item_id");
 	 %>
 	 <table>
          <tr>
@@ -58,7 +58,7 @@ else if(type.equals("shirt")){
       <% 
 }
 else if(type.equals("pants")){
-	 rs=st.executeQuery("select sum(a.current_price) as total from auctions a,pants p where now()>a.end_date and a.item_id=p.item_id;");
+	 rs=st.executeQuery("select sum(ss.final_price) as total from sold ss, pants p, auctions a where buyer <> '' and ss.auction_id = a.auction_id and a.item_id = p.item_id");
 	 %>
 	 <table>
          <tr>
@@ -76,7 +76,7 @@ else if(type.equals("pants")){
       <% 
 }
 else {
-	 rs=st.executeQuery("select sum(a.current_price) as total from auctions a,footwear f where now()>a.end_date and a.item_id=f.item_id;");
+	 rs=st.executeQuery("select sum(ss.final_price) as total from sold ss, footwear f, auctions a where buyer <> '' and ss.auction_id = a.auction_id and a.item_id = f.item_id");
 	 %>
 	 <table>
          <tr>

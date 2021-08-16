@@ -1,8 +1,8 @@
 <%@ page import ="java.sql.*" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Sales Report</title>
+	<head>
+    	<title>Sales Report</title>
     <style>
 			table {
 				border: 1px solid black;
@@ -20,9 +20,9 @@
 			tr:nth-child(even) {
 				background-color: #f2f2f2;
 			}
-		</style>
-</head>
-<body>
+	</style>
+	</head>
+	<body>
     	<%
         Class.forName("com.mysql.jdbc.Driver");
         String data_type= request.getParameter("data_type");
@@ -31,7 +31,7 @@
         ResultSet rs;
         
         if(data_type.equals("total_earnings")){
-        	 rs=st.executeQuery("select sum(a.current_price) as total from auctions a where now()>a.end_date;");
+        	 rs=st.executeQuery("select sum(s.final_price) as total from sold s where buyer <> ''");
         	 %>
         	 <table>
                  <tr>
@@ -49,7 +49,7 @@
               <% 
         }
         else if(data_type.equals("best_items")){
-        	 rs=st.executeQuery("select a.item_id, sum(a.current_price) as total from auctions a where now()>a.end_date group by item_id order by total desc");
+        	 rs=st.executeQuery("select a.item_id, sum(s.final_price) as total from auctions a natural join sold s where s.buyer <> '' group by a.item_id order by total desc");
         	 %>
         	 <table border=1 style="text-align:center">
                  <tr>
@@ -69,7 +69,7 @@
               <% 
         }
         else if(data_type.equals("best_sellers")){
-        	 rs=st.executeQuery("select a.seller, sum(a.current_price) as total from auctions a where now()>a.end_date group by seller order by total desc;");
+        	 rs=st.executeQuery("select a.seller, sum(a.current_price) as total from auctions a natural join sold s where buyer <> '' group by seller order by total desc;");
         	 %>
         	 <table border=1 style="text-align:center">
                  <tr>

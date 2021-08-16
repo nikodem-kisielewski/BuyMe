@@ -176,7 +176,8 @@
 		</form>
 		<h2>Autobid</h2>
 		<p>Autobids are like normal bids that are automated for you. If you are outbid on an auction, the autobid system will automatically place a new bid for you.
-		This system will continue to bid for you until the current bid on the item exceeds the maximum price of your desired maximum bid. NOTE: YOU CAN ONLY SET UP 1 AUTOBID PER AUCTION.<p>
+		This system will continue to bid for you until the current bid on the item exceeds the maximum price of your desired maximum bid. NOTE: YOU CAN ONLY SET ANOTHER AUTO
+		BID ON THIS AUCTION AFTER YOUR PREVIOUS ONE IS OUTBID.<p>
 		<form action="checkAutobid.jsp" method="POST">
 			<p>This field determines how much your bids will increment with each autobid made on the item.</p>
 			Bid increment: <input type="number" step="0.01" name="bidIncrement"><br>

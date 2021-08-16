@@ -6,7 +6,7 @@ Class.forName("com.mysql.jdbc.Driver");
 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BuyMe","root", "rootpass");
 Statement st=con.createStatement();
 ResultSet rs;
-rs=st.executeQuery("select item_id from items where item_id='"+item_id+"';");
+rs=st.executeQuery("select item_id from items where item_id="+item_id);
 %>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ rs=st.executeQuery("select item_id from items where item_id='"+item_id+"';");
     	<% if(!rs.first()) { %>
     		<a href='generateSalesReport.jsp'>Item does not exist in database</a>
     	<%  } else {
-    		rs=st.executeQuery("select max(current_price) as total from auctions where item_id='"+item_id+"' and now()>end_date;");
+    		rs=st.executeQuery("select max(final_price) as total from sold natural join auctions where buyer <> '' and item_id="+item_id);
     		rs.first();
         %>
          
