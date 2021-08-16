@@ -15,7 +15,7 @@ public class ApplicationDB {
 	public Connection getConnection(){
 		
 		//Create a connection string
-		String connectionUrl = "https://nikodem-kisielewski.github.io/BuyMe/";
+		String connectionUrl = "jdbc:mysql://localhost:3306/BuyMe";
 		Connection connection = null;
 		
 		try {
