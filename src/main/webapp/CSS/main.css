@@ -1,0 +1,60 @@
+h1, h2 {
+	text-align: center;
+}
+
+table {
+	width: 50%;
+	text-align: left;
+	padding: 16px;
+}
+
+th, td {
+	padding: 16px;
+	border-bottom: 1px solid black;
+}
+
+.center {
+	position: relative;
+	left: 50%;
+}
+
+.center-collapse {
+ 	position: relative;
+ 	left: 25%;
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 50%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:hover {
+  background-color: #ccc;
+}
+
+.collapsible-content {
+  	padding: 0 18px;
+  	background-color: white;
+  	max-height: 0;
+  	overflow: hidden;
+  	transition: max-height 0.2s ease-out;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}

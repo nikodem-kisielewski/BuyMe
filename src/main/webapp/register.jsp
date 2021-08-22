@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>Login Form</title>
-   </head>
-   <body>
-   <h1>BuyMe Registration</h1>
-     <form action="checkRegistration.jsp" method="POST">
-       Username: <input type="text" name="username"><br>
-       Password: <input type="password" name="password"><br>
-       <input type="submit" value="Submit"/>
-       <div>
-       		<a href='login.jsp'>Go back to login page</a>
-       </div>
-     </form>
-   </body>
+	<head>
+		<link rel='stylesheet' href='CSS/forms.css'>
+		<title>Registration Form</title>
+	</head>
+	<body>
+		<div class='back'>
+			<h1>BuyMe Registration</h1>
+			<form action="checkLogin.jsp" method="POST">
+				Username: <input type="text" class='login' name="username">
+				Password: <input type="password" name="password">
+				<div class='link'>
+					<input type="submit" value="Register"/><br>
+					<a href='login.jsp'>Go back to login page</a>
+				</div>
+			</form>
+		</div>
+	</body>
 </html>

@@ -90,7 +90,7 @@ String userid = request.getParameter("username");
 String pwd = request.getParameter("password");
 
 //Check if the username and corresponding password are in the database
-rs = st.executeQuery("select username, password, acct_type from users where username='" + userid + "' and password='" + pwd + "'");
+rs = st.executeQuery("select * from users where username='" + userid + "' and password='" + pwd + "'");
 
 if (rs.next()) {
 	
